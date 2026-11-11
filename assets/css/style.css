@@ -5,6 +5,7 @@
   --accent: #0b5a8f;
   --bg: #f7f9fb;
   --white: #ffffff;
+  --serif: Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
 }
 * { box-sizing: border-box; }
 html { scrollbar-gutter: stable; }
@@ -20,36 +21,34 @@ body {
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* --- masthead: centred, coloured band --- */
+/* --- header: serif academic --- */
 .site-header {
-  background: linear-gradient(165deg, #082437 0%, #0e3d59 62%, #12507a 100%);
-  border-bottom: 4px solid var(--accent);
-  color: #ffffff;
+  background: #fcfbf8;
+  border-top: 3px solid var(--ink);
+  border-bottom: 1px solid #d8d2c4;
+  font-family: var(--serif);
 }
 .masthead {
-  display: flex; flex-direction: column; align-items: center;
-  padding-top: 32px; padding-bottom: 0;
+  display: flex; flex-wrap: wrap; align-items: flex-end;
+  justify-content: space-between; gap: 10px 32px;
+  padding-top: 20px; padding-bottom: 15px;
 }
-.brand { color: #ffffff; }
+.brand { color: var(--ink); }
 .brand:hover { text-decoration: none; }
 .brand-name {
-  display: block; font-size: 1.78rem; font-weight: 700;
-  letter-spacing: .055em; line-height: 1.25; text-align: center;
+  display: block; font-size: 1.5rem; font-weight: 700;
+  letter-spacing: .005em; line-height: 1.25;
 }
-.brand-sub { font-size: 1rem; color: var(--muted); line-height: 1.45; margin: 0; }
-.site-nav {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;
-  width: 100%; margin-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, .2);
-  padding: 13px 0 15px;
-}
+.brand-sub { font-size: .92rem; font-style: italic; color: #6f6455; line-height: 1.45; margin: 5px 0 0; }
+.site-nav { display: flex; flex-wrap: wrap; gap: 24px; padding-bottom: 4px; }
 .site-nav a {
-  font-size: .82rem; font-weight: 600; letter-spacing: .13em;
-  text-transform: uppercase; color: rgba(255, 255, 255, .74);
-  padding-bottom: 3px; border-bottom: 2px solid transparent;
+  font-family: var(--serif);
+  font-size: .84rem; font-weight: 400; letter-spacing: .11em;
+  text-transform: uppercase; color: #6f6455;
+  padding-bottom: 3px; border-bottom: 1px solid transparent;
 }
 .site-nav a:hover, .site-nav a.active {
-  color: #ffffff; border-bottom-color: #8fc3e8; text-decoration: none;
+  color: var(--accent); border-bottom-color: var(--accent); text-decoration: none;
 }
 
 main.wrap { padding-top: 48px; padding-bottom: 64px; min-height: 60vh; }
@@ -145,10 +144,10 @@ address { font-style: normal; line-height: 1.8; }
 @media (max-width: 640px) {
   .hero { padding: 28px 22px; }
   .hero h1 { font-size: 1.8rem; }
-  .masthead { padding-top: 24px; }
-  .brand-name { font-size: 1.12rem; letter-spacing: .02em; }
-  .site-nav { gap: 18px; margin-top: 16px; padding: 11px 0 13px; }
-  .site-nav a { font-size: .74rem; letter-spacing: .08em; padding: 4px 0; }
+  .masthead { padding-top: 15px; padding-bottom: 12px; gap: 8px 20px; }
+  .brand-name { font-size: 1.16rem; letter-spacing: .005em; }
+  .site-nav { gap: 16px; padding-bottom: 2px; }
+  .site-nav a { font-size: .72rem; letter-spacing: .08em; padding: 4px 0 3px; }
   main.wrap { padding-top: 24px; }
 }
 

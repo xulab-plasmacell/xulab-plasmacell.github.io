@@ -7,6 +7,7 @@
   --white: #ffffff;
 }
 * { box-sizing: border-box; }
+html { scrollbar-gutter: stable; }
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -21,18 +22,18 @@ a:hover { text-decoration: underline; }
 
 .site-header { background: var(--white); border-bottom: 1px solid var(--line); }
 .site-header .wrap {
-  display: flex; flex-direction: column; gap: 6px;
-  padding-top: 14px; padding-bottom: 12px;
+  display: flex; flex-direction: column; gap: 10px;
+  padding-top: 20px; padding-bottom: 16px;
 }
 .head-top {
-  display: flex; flex-wrap: wrap; align-items: center;
-  justify-content: space-between; gap: 8px 28px;
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  justify-content: space-between; gap: 8px 48px;
 }
 .brand { color: var(--ink); }
 .brand:hover { text-decoration: none; }
 .brand-name { font-size: 1.35rem; font-weight: 700; letter-spacing: .01em; }
 .brand-sub { font-size: 1rem; color: var(--muted); line-height: 1.45; margin: 0; }
-.site-nav { display: flex; flex-wrap: wrap; gap: 22px; }
+.site-nav { display: flex; flex-wrap: wrap; gap: 26px; }
 .site-nav a {
   font-size: .95rem; font-weight: 500; color: var(--muted);
   padding-bottom: 2px; border-bottom: 2px solid transparent;
@@ -41,7 +42,7 @@ a:hover { text-decoration: underline; }
   color: var(--accent); border-bottom-color: var(--accent); text-decoration: none;
 }
 
-main.wrap { padding-top: 40px; padding-bottom: 64px; min-height: 60vh; }
+main.wrap { padding-top: 48px; padding-bottom: 64px; min-height: 60vh; }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;

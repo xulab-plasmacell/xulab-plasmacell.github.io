@@ -6,6 +6,11 @@
   --bg: #f7f9fb;
   --white: #ffffff;
   --serif: Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
+  --paper: #fcfbf8;
+  --warm: #6f6455;
+  --warm-line: #d8d2c4;
+  --dot: #b9cbdb;
+  --avatar-bg: #dbe7f0;
 }
 * { box-sizing: border-box; }
 html { scrollbar-gutter: stable; }
@@ -23,9 +28,9 @@ a:hover { text-decoration: underline; }
 
 /* --- header: serif academic --- */
 .site-header {
-  background: #fcfbf8;
+  background: var(--paper);
   border-top: 3px solid var(--ink);
-  border-bottom: 1px solid #d8d2c4;
+  border-bottom: 1px solid var(--warm-line);
   font-family: var(--serif);
 }
 .masthead {
@@ -39,12 +44,12 @@ a:hover { text-decoration: underline; }
   display: block; font-size: 1.5rem; font-weight: 700;
   letter-spacing: .005em; line-height: 1.25;
 }
-.brand-sub { font-size: .92rem; font-style: italic; color: #6f6455; line-height: 1.45; margin: 5px 0 0; }
+.brand-sub { font-size: .92rem; font-style: italic; color: var(--warm); line-height: 1.45; margin: 5px 0 0; }
 .site-nav { display: flex; flex-wrap: wrap; gap: 24px; padding-bottom: 4px; }
 .site-nav a {
   font-family: var(--serif);
   font-size: .84rem; font-weight: 400; letter-spacing: .11em;
-  text-transform: uppercase; color: #6f6455;
+  text-transform: uppercase; color: var(--warm);
   padding-bottom: 3px; border-bottom: 1px solid transparent;
 }
 .site-nav a:hover, .site-nav a.active {
@@ -81,7 +86,7 @@ h2 { font-size: 1.35rem; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1
 .rq-topic:last-child { margin-bottom: 0; }
 .rq-topic::before {
   content: ""; position: absolute; left: 0; top: .58em;
-  width: 5px; height: 5px; border-radius: 50%; background: #b9cbdb;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--dot);
 }
 @media (min-width: 780px) {
   .rq-grid > .rq-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
@@ -94,7 +99,15 @@ h2 { font-size: 1.35rem; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1
   display: inline-block; background: var(--accent); color: #fff;
   padding: 9px 18px; border-radius: 6px; font-size: .92rem;
 }
-.button:hover { text-decoration: none; opacity: .9; }
+.button:hover { text-decoration: none; background: #094a75; }
+
+/* --- color audit C8: in-text links always underlined (WCAG 1.4.1) --- */
+.overview a, .lede a, .news-list a, .pub-note a, .pub-links a,
+.profile-links a, .contact-action a, .alumni-list a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
 
 .page-head { margin-bottom: 28px; }
 .page-head h1 { font-size: 2rem; margin: 0 0 6px; }
@@ -109,7 +122,7 @@ h2 { font-size: 1.35rem; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1
 .avatar { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; margin-bottom: 14px; }
 .avatar-placeholder {
   display: flex; align-items: center; justify-content: center;
-  background: #dbe7f0; color: var(--accent); font-size: 1.9rem; font-weight: 700;
+  background: var(--avatar-bg); color: var(--accent); font-size: 1.9rem; font-weight: 700;
 }
 .person h2 { font-size: 1.1rem; border: 0; padding: 0; margin: 0 0 4px; }
 .person .role { font-size: .85rem; color: var(--accent); font-weight: 600; margin: 0 0 8px; }
@@ -142,7 +155,7 @@ address { font-style: normal; line-height: 1.8; }
 .footer-name { color: var(--ink); font-weight: 600; }
 .footer-tagline {
   font-family: var(--serif); font-style: italic;
-  color: #6f6455; font-weight: 400; font-size: .95em;
+  color: var(--warm); font-weight: 400; font-size: .95em;
 }
 
 @media (max-width: 640px) {

@@ -136,13 +136,13 @@ address { font-style: normal; line-height: 1.8; }
 
 .site-footer {
   background: var(--white); border-top: 1px solid var(--line);
-  padding: 28px 0; font-size: .88rem; color: var(--muted);
+  padding: 28px 0; font-size: .84rem; color: var(--muted);
 }
 .site-footer p { margin: 4px 0; }
 .footer-name { color: var(--ink); font-weight: 600; }
 .footer-tagline {
   font-family: var(--serif); font-style: italic;
-  color: #6f6455; margin-top: 1px;
+  color: #6f6455; font-weight: 400; font-size: .95em;
 }
 
 @media (max-width: 640px) {

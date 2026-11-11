@@ -49,6 +49,8 @@ main.wrap { padding-top: 40px; padding-bottom: 64px; min-height: 60vh; }
 h2 { font-size: 1.35rem; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
 .overview { max-width: none; font-size: 1.01rem; line-height: 1.78; }
 .overview + .overview { margin-top: 14px; }
+.research-figure { margin: 26px 0 6px; }
+.research-figure img { display: block; width: 100%; height: auto; }
 .area-list { padding-left: 20px; }
 .area-list li { margin: 6px 0; }
 .callout {

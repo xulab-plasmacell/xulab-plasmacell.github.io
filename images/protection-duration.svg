@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 430" width="880" height="430" role="img" aria-labelledby="t4 d4">
+<title id="t4">How long each vaccine protects, as a bar chart</title>
+<desc id="d4">Horizontal bars showing typical duration of protection: smallpox lifelong, measles decades, HPV ten years and counting, tetanus about ten years, influenza and COVID-19 only months.</desc>
+<rect width="880" height="430" fill="#fffdf9"/>
+<text x="32" y="46" font-family="Segoe UI, -apple-system, Arial, sans-serif" font-size="17" font-weight="700" fill="#1b2733">One immune system, very different lifespans</text>
+<text x="32" y="70" font-family="Segoe UI, -apple-system, Arial, sans-serif" font-size="12" fill="#8b99a6">Typical duration of protection on one linear scale &#8212; note how short the last two are</text>
+
+<g font-family="Segoe UI, -apple-system, Arial, sans-serif" font-size="12" fill="#1b2733" text-anchor="end">
+  <text x="196" y="131">Smallpox</text>
+  <text x="196" y="175">Measles</text>
+  <text x="196" y="219">HPV</text>
+  <text x="196" y="263">Tetanus</text>
+  <text x="196" y="307">Influenza</text>
+  <text x="196" y="351">COVID-19</text>
+</g>
+
+<g stroke="#eef1f4" stroke-width="1" stroke-dasharray="2 6">
+  <line x1="210" y1="100" x2="210" y2="366"/><line x1="335" y1="100" x2="335" y2="366"/><line x1="460" y1="100" x2="460" y2="366"/>
+  <line x1="585" y1="100" x2="585" y2="366"/><line x1="710" y1="100" x2="710" y2="366"/>
+</g>
+
+<rect x="210" y="116" width="500" height="20" rx="7" fill="#2f7a63"/>
+<path d="M710 126 L866 126" stroke="#2f7a63" stroke-width="2" stroke-dasharray="3 6"/>
+<text x="720" y="112" font-family="Segoe UI, -apple-system, Arial, sans-serif" font-size="11" font-weight="600" fill="#2f7a63">beyond a lifetime</text>
+
+<rect x="210" y="160" width="380" height="20" rx="7" fill="#0b5a8f"/>
+<text x="600" y="175" font-family="Segoe UI, -apple-system, Arial, sans-serif" font-size="11" fill="#5c6b7a">decades</text>
+
+<rect x="210" y="204" width="140" height="20" rx="7" fill="#6d63a8"/>
+<text x="360" y="219" font-family="Segoe UI, -apple-system, Arial, sans-serif" font-size="11" fill="#5c6b7a">10 years and counting</text>
+
+<rect x="210" y="248" width="128" height="20" rx="7" fill="#c98a3d"/>
+<text x="348" y="263" font-family="Segoe UI, -apple-system, Arial, sans-serif" font-size="11" fill="#5c6b7a">about 10 years &#183; boosters</text>
+
+<rect x="210" y="292" width="9" height="20" rx="4.5" fill="#bf5b4e"/>
+<text x="230" y="307" font-family="Segoe UI, -apple-system, Arial, sans-serif" font-size="11" fill="#bf5b4e">a few months &#183; annual reformulation</text>
+
+<rect x="210" y="336" width="11" height="20" rx="5.5" fill="#d97742"/>
+<text x="232" y="351" font-family="Segoe UI, -apple-system, Arial, sans-serif" font-size="11" fill="#d97742">a few months &#183; boosters</text>
+
+<line x1="210" y1="372" x2="710" y2="372" stroke="#e2e8ee" stroke-width="1.4"/>
+<g font-family="Segoe UI, -apple-system, Arial, sans-serif" font-size="10" fill="#b0bbc4" text-anchor="middle">
+  <text x="210" y="390">0</text><text x="335" y="390">10</text><text x="460" y="390">20</text><text x="585" y="390">30</text><text x="710" y="390">40</text>
+</g>
+<text x="710" y="410" text-anchor="end" font-family="Segoe UI, -apple-system, Arial, sans-serif" font-size="10" fill="#b0bbc4">years of protection</text>
+</svg>

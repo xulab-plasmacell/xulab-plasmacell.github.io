@@ -1,0 +1,175 @@
+Xu Lab 官网 · 内容核对清单（2026-11-06 全新版）
+================================================================
+
+实验室: Xu Lab
+机构: Zhongshan School of Medicine, Sun Yat-sen University
+站点标题: Xu Lab | Plasma Cell Biology, Sun Yat-sen University
+邮箱: xuchliang (at) mail.sysu.edu.cn  [网页上以 (at) 形式展示，防爬虫抓取]
+地址: Prof. Chunliang Xu, Zhongshan School of Medicine, Sun Yat-sen University, No. 74 Zhongshan 2nd Road, Yuexiu District, Guangzhou, Guangdong 510080, P. R. China, 
+
+成员: 1 人（PI: Chunliang Xu, PhD）
+论文: 38 篇，其中有 DOI 37 篇
+----------------------------------------------------------------
+ 1. [2026] Fasting impairs humoral immunological memory by β-hydroxybutyrate-mediated depletion of plasma cells
+    Immunity 59(4):1006-1024.e7
+    Wu J 在作者串中（Crossref 核实 Jiawen Wu，官方中文主页"We J"为笔误）
+    DOI: 10.1016/j.immuni.2026.01.002
+    注: Sole corresponding author. Highlighted by Nature Reviews Immunology.
+
+ 2. [2026] Inhibition of mitochondrial ROS by TACI sustains bone marrow plasma cells
+    Zhu Y, Chen J, Lv H, Chen J, Tong Z, Hao X, Jing Z, Jiang H, Meng H, Yang C, Xu C
+    Nature Communications 17:8546
+    DOI: 10.1038/s41467-026-75430-w
+
+ 3. [2026] Protocol for selective in vivo labeling of bone marrow plasma cells by intrafemoral antibody injection in mice
+    Tong Z, Zhu Y, Lv H, Liu S, Xu C
+    STAR Protocols 7(3)
+    DOI: 10.1016/j.xpro.2026.104750
+    注: Step-by-step methods protocol.（Crossref + PubMed 42525532 双源核实，2026-11-11）
+
+ 4. [2025] Haematopoietic stem cell number is not solely defined by niche availability
+    Nature 646:687-696
+    DOI: 10.1038/s41586-025-09462-5
+    注: Published in Nature (2025). 标题以出版商 Crossref 核实版本为准。
+
+ 5. [2022] Brain motor and fear circuits regulate leukocytes during acute stress
+    Nature
+    DOI: 10.1038/s41586-022-04890-z
+
+ 6. [2022] The microbiota regulates hematopoietic stem cell fate decisions by controlling iron availability in bone marrow
+    Cell Stem Cell 29(2):232-247
+    DOI: 10.1016/j.stem.2021.12.009
+
+ 7. [2022] Mesenchymal stromal cells equipped by IFNα empower T cells with potent anti-tumor immunity
+    Oncogene 41(13):1866-1881
+    DOI: 10.1038/s41388-022-02201-4
+
+ 8. [2021] Nociceptive nerves regulate haematopoietic stem cell mobilization
+    Nature 589(7843):591-596
+    DOI: 10.1038/s41586-020-03057-y
+    注: Equal contribution.
+
+ 9. [2021] MAEA is an E3 ubiquitin ligase promoting autophagy and maintenance of haematopoietic stem cells
+    Nature Communications 12:2522
+    DOI: 10.1038/s41467-021-22749-1
+
+10. [2021] Nociceptors protect sickle cell disease mice from vaso-occlusive episodes and chronic organ damage
+    Journal of Experimental Medicine 218(1):e20200065
+    DOI: 10.1084/jem.20200065
+    注: Highlighted by Science Translational Medicine.
+
+11. [2020] The gut microbiome regulates psychological stress-induced inflammation
+    Immunity 53(2):417-428.e4
+    DOI: 10.1016/j.immuni.2020.06.025
+    注: Highlighted by Nature; Preview in Immunity; highlighted by Science Translational Medicine.
+
+12. [2020] Snai2 maintains bone marrow niche cells by repressing osteopontin expression
+    Developmental Cell 53(5):503-513.e5
+    DOI: 10.1016/j.devcel.2020.04.012
+
+13. [2020] Randomized Phase 2 trial of intravenous gamma globulin (IVIG) for the treatment of acute vaso-occlusive crisis in patients with sickle cell disease: lessons learned from the midpoint analysis
+    Complementary Therapies in Medicine 52:102481
+    DOI: 10.1016/j.ctim.2020.102481
+
+14. [2019] Seasonal manifestations of sickle cell disease activity
+    Nature Medicine 25(4):536-537
+    DOI: 10.1038/s41591-019-0409-3
+
+15. [2019] Engineering a haematopoietic stem cell niche by revitalizing mesenchymal stromal cells
+    Nature Cell Biology 21(5):560-567
+    DOI: 10.1038/s41556-019-0308-3
+
+16. [2019] The good side of inflammation: Staphylococcus aureus proteins SpA and Sbi contribute to proper abscess formation and wound healing during skin and soft tissue infections
+    BBA - Molecular Basis of Disease 1865(10):2657-2670
+    DOI: 10.1016/j.bbadis.2019.07.004
+
+17. [2018] The hematopoietic stem cell niche: from embryo to adult
+    Development 145(2)
+    DOI: 10.1242/dev.139691
+
+18. [2018] Stem cell factor is selectively secreted by arterial endothelial cells in bone marrow
+    Nature Communications 9(1):2449
+    DOI: 10.1038/s41467-018-04726-3
+
+19. [2017] Downregulation of CXCL12 in mesenchymal stromal cells by TGFβ promotes breast cancer metastasis
+    Oncogene 36(6):840-849
+    DOI: 10.1038/onc.2016.252
+
+20. [2016] Neutrophils, platelets, and inflammatory pathways at the nexus of sickle cell disease pathophysiology
+    Blood 127(7):801-809
+    DOI: 10.1182/blood-2015-09-618538
+    注: Equal contribution.
+
+21. [2016] Efficient presentation of multiple endogenous epitopes to both CD4+ and CD8+ diabetogenic T cells for tolerance
+    Molecular Therapy - Methods & Clinical Development 4:27-38
+    DOI: 10.1016/j.omtm.2016.12.002
+
+22. [2016] Type I interferons exert anti-tumor effect via reversing immunosuppression mediated by mesenchymal stromal cells
+    Oncogene 35(46):5953-5962
+    DOI: 10.1038/onc.2016.128
+
+23. [2016] SHP1 regulates bone mass by directing mesenchymal stem cell differentiation
+    Cell Reports 16(3):769-780
+    DOI: 10.1016/j.celrep.2016.06.035
+
+24. [2016] Fate decision of mesenchymal stem cells: adipocytes or osteoblasts?
+    Cell Death & Differentiation 23(7):1128-1139
+    DOI: 10.1038/cdd.2015.168
+
+25. [2015] Neutrophil ageing is regulated by the microbiome
+    Nature 525(7570):528-532
+    DOI: 10.1038/nature15367
+
+26. [2015] CD11b regulates obesity-induced insulin resistance via limiting alternative activation and proliferation of adipose tissue macrophages
+    PNAS 112(52):E7239-E7248
+    DOI: 10.1073/pnas.1500396113
+
+27. [2014] Transforming growth factor β promotes immune responses in the presence of mesenchymal stem cells
+    Journal of Immunology 192(1):103-109
+    DOI: 10.4049/jimmunol.1302164
+    注: Highlighted in the 'In This Issue' section.
+
+28. [2014] Interleukin-17A enhances immunosuppression by mesenchymal stem cells
+    Cell Death and Differentiation 21(11):1758-1768
+    DOI: 10.1038/cdd.2014.85
+
+29. [2014] SSC-high CD11b-high Ly-6C-high Ly-6G-low myeloid cells curtail CD4 T cell response by inducing nitric oxide synthase in murine hepatitis
+    International Journal of Biochemistry & Cell Biology 54:89-97
+    DOI: 10.1016/j.biocel.2014.07.005
+
+30. [2014] p53 regulates mesenchymal stem cell-mediated tumor suppression in a tumor microenvironment through immune modulation
+    Oncogene 33(29):3830-3838
+    DOI: 10.1038/onc.2013.355
+
+31. [2014] Mesenchymal stem cells prevent restraint stress-induced lymphocyte reduction via interleukin-4
+    Brain, Behavior, and Immunity 38:125-132
+    DOI: 10.1016/j.bbi.2014.01.013
+
+32. [2014] An osteopontin-integrin interaction plays a critical role in directing adipogenesis and osteogenesis by mesenchymal stem cells
+    Stem Cells 32(2):327-337
+    DOI: 10.1002/stem.1567
+
+33. [2014] IFNα-secreting MSCs exert potent anti-tumor effect in vivo
+    Oncogene 33(42):5047-5052
+    DOI: 10.1038/onc.2013.458
+
+34. [2013] miR-155 regulates immune modulatory properties of mesenchymal stem cells by targeting TAK1-binding protein 2
+    Journal of Biological Chemistry 288(16):11074-11079
+    DOI: 10.1074/jbc.m112.414862
+
+35. [2013] The research of the relationship between cyclooxygenase-2 and monocyte endothelial cells adhesion
+    Chinese Journal of Laboratory Diagnosis 17(10)
+    DOI: (无 DOI)
+    注: Chinese-language journal. No DOI available.
+
+36. [2012] CCR2-dependent recruitment of macrophages by tumor-educated mesenchymal stromal cells promotes tumor development and is mimicked by TNFα
+    Cell Stem Cell 11(6):812-824
+    DOI: 10.1016/j.stem.2012.08.013
+
+37. [2010] Mesenchymal stem cells: a new strategy for immunosuppression and tissue repair
+    Cell Research 20(5):510-518
+    DOI: 10.1038/cr.2010.44
+
+38. [2009] A single point mutation in E2 enhances hepatitis C virus infectivity and alters lipoprotein association of viral particles
+    Virology 395(1):67-76
+    DOI: 10.1016/j.virol.2009.09.006

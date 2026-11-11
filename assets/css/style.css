@@ -51,7 +51,7 @@ main.wrap { padding-top: 48px; padding-bottom: 64px; min-height: 60vh; }
 
 .section { margin-bottom: 36px; }
 h2 { font-size: 1.35rem; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
-.overview { max-width: none; font-size: 1.01rem; line-height: 1.78; }
+.overview { max-width: none; font-size: 1.01rem; line-height: 1.78; text-align: justify; text-justify: inter-word; hyphens: auto; }
 .overview + .overview { margin-top: 14px; }
 .research-figure { margin: 0 0 34px; }
 .research-figure img { display: block; width: 100%; height: auto; }

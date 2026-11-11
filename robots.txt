@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://xulab-plasmacell.github.io/sitemap.xml
+Sitemap: https://plasmacells.org/sitemap.xml

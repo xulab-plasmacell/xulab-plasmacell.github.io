@@ -33,7 +33,7 @@ Xu Lab 官网 · 全新上线包（2026-11-11 更新）
   4. Commit message 填 Fresh launch，选 Commit directly to the main branch。
   5. 仓库 Settings -> Pages -> Source 选 Deploy from a branch，
      Branch 选 main / (root)，Save。
-  6. 等 1-2 分钟，访问 https://xulab-plasmacell.github.io
+  6. 等 1-2 分钟，访问 https://plasmacells.org
 
 【这套包刻意去掉了什么】
   - 没有 _config.yml、_data/、_layouts/（旧版 Jekyll 遗留，会干扰构建）

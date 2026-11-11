@@ -4,7 +4,7 @@ Xu Lab 官网 · 内容核对清单（2026-11-06 全新版）
 实验室: Xu Lab
 机构: Zhongshan School of Medicine, Sun Yat-sen University
 站点标题: Xu Lab | Plasma Cell Biology, Sun Yat-sen University
-邮箱: xuchliang (at) mail.sysu.edu.cn  [网页上以 (at) 形式展示，防爬虫抓取]
+邮箱: contact (at) plasmacells.org（Cloudflare 转发到 163；官方信件用 xuchliang@mail.sysu.edu.cn）  [网页上以 (at) 形式展示，防爬虫抓取]
 地址: Prof. Chunliang Xu, Zhongshan School of Medicine, Sun Yat-sen University, No. 74 Zhongshan 2nd Road, Yuexiu District, Guangzhou, Guangdong 510080, P. R. China, 
 
 成员: 1 人（PI: Chunliang Xu, PhD）

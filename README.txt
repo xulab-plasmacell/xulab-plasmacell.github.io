@@ -53,6 +53,12 @@ Xu Lab 官网 · 全新上线包（2026-11-11 更新）
     5. 等 1-2 分钟，Ctrl+Shift+R 强刷验收
     改坏了不怕：Commits 里点旧提交 ... -> Revert 一键还原。
 
+    加一条 News（首页 index.html，只显示最近 10 条）：
+      在 <ul class="news-list"> 的【第一行】插入一条，格式照现有条目：
+      <li><span class="news-date">Sep 2026</span>一句话说明。</li>
+      日期写法固定为 三字母月份 + 空格 + 年份（Sep / Oct / Nov / Dec ...）。
+      插完后把【最末一条】整行删掉，保持 10 条——列表太长会显得组里没新动静。
+
   方式二：发给管理员/AI 代改（推荐：加论文、加成员、改多处）
     1. 把新资料发给 AI（如：论文标题、作者、期刊、年份、DOI）
     2. AI 返回改好的单个文件（例如 publications.html）

@@ -144,6 +144,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
 .news-list li { padding: 10px 0; border-bottom: 1px solid var(--line); }
 .news-list li:last-child { border-bottom: 0; }
 .news-date { font-weight: 600; color: var(--accent); margin-right: 10px; font-size: .9rem; white-space: nowrap; }
+.news-link { white-space: nowrap; }
 .rq { font-size: 1.02rem; margin: 20px 0 8px; padding: 0; border: 0; }
 .funding-note { font-size: .85rem; margin-top: 16px; }
 

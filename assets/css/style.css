@@ -54,8 +54,28 @@ h2 { font-size: 1.35rem; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1
 .overview + .overview { margin-top: 14px; }
 .research-figure { margin: 0 0 34px; }
 .research-figure img { display: block; width: 100%; height: auto; }
-.area-list { padding-left: 20px; }
-.area-list li { margin: 6px 0; }
+.rq-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(310px, 100%), 1fr));
+  gap: 16px; margin-top: 10px;
+}
+.rq-card {
+  background: var(--white); border: 1px solid var(--line); border-radius: 10px;
+  border-top: 3px solid var(--accent);
+  padding: 18px 20px 16px;
+}
+.rq-card h3 { font-size: 1rem; line-height: 1.42; margin: 0 0 10px; }
+.rq-topic {
+  position: relative; margin: 0 0 5px; padding-left: 14px;
+  font-size: .9rem; color: var(--muted); line-height: 1.5;
+}
+.rq-topic:last-child { margin-bottom: 0; }
+.rq-topic::before {
+  content: ""; position: absolute; left: 0; top: .58em;
+  width: 5px; height: 5px; border-radius: 50%; background: #b9cbdb;
+}
+@media (min-width: 780px) {
+  .rq-grid > .rq-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
 .callout {
   background: var(--white); border: 1px solid var(--line);
   border-left: 4px solid var(--accent); border-radius: 8px; padding: 24px 28px;

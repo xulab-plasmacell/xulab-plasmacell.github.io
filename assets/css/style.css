@@ -20,26 +20,36 @@ body {
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-.site-header { background: var(--white); border-bottom: 1px solid var(--line); }
-.site-header .wrap {
-  display: flex; flex-direction: column; gap: 10px;
-  padding-top: 20px; padding-bottom: 16px;
+/* --- masthead: centred, coloured band --- */
+.site-header {
+  background: linear-gradient(165deg, #082437 0%, #0e3d59 62%, #12507a 100%);
+  border-bottom: 4px solid var(--accent);
+  color: #ffffff;
 }
-.head-top {
-  display: flex; flex-wrap: wrap; align-items: baseline;
-  justify-content: space-between; gap: 8px 48px;
+.masthead {
+  display: flex; flex-direction: column; align-items: center;
+  padding-top: 32px; padding-bottom: 0;
 }
-.brand { color: var(--ink); }
+.brand { color: #ffffff; }
 .brand:hover { text-decoration: none; }
-.brand-name { font-size: 1.35rem; font-weight: 700; letter-spacing: .01em; }
+.brand-name {
+  display: block; font-size: 1.78rem; font-weight: 700;
+  letter-spacing: .055em; line-height: 1.25; text-align: center;
+}
 .brand-sub { font-size: 1rem; color: var(--muted); line-height: 1.45; margin: 0; }
-.site-nav { display: flex; flex-wrap: wrap; gap: 26px; }
+.site-nav {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;
+  width: 100%; margin-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, .2);
+  padding: 13px 0 15px;
+}
 .site-nav a {
-  font-size: .95rem; font-weight: 500; color: var(--muted);
-  padding-bottom: 2px; border-bottom: 2px solid transparent;
+  font-size: .82rem; font-weight: 600; letter-spacing: .13em;
+  text-transform: uppercase; color: rgba(255, 255, 255, .74);
+  padding-bottom: 3px; border-bottom: 2px solid transparent;
 }
 .site-nav a:hover, .site-nav a.active {
-  color: var(--accent); border-bottom-color: var(--accent); text-decoration: none;
+  color: #ffffff; border-bottom-color: #8fc3e8; text-decoration: none;
 }
 
 main.wrap { padding-top: 48px; padding-bottom: 64px; min-height: 60vh; }
@@ -135,8 +145,10 @@ address { font-style: normal; line-height: 1.8; }
 @media (max-width: 640px) {
   .hero { padding: 28px 22px; }
   .hero h1 { font-size: 1.8rem; }
-  .site-nav { gap: 14px; }
-  .site-nav a { padding: 6px 0; }
+  .masthead { padding-top: 24px; }
+  .brand-name { font-size: 1.12rem; letter-spacing: .02em; }
+  .site-nav { gap: 18px; margin-top: 16px; padding: 11px 0 13px; }
+  .site-nav a { font-size: .74rem; letter-spacing: .08em; padding: 4px 0; }
   main.wrap { padding-top: 24px; }
 }
 

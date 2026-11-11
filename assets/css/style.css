@@ -28,7 +28,7 @@ a:hover { text-decoration: underline; }
 .brand { display: flex; flex-direction: column; color: var(--ink); max-width: 660px; }
 .brand:hover { text-decoration: none; }
 .brand-name { font-size: 1.35rem; font-weight: 700; letter-spacing: .01em; }
-.brand-sub { font-size: .78rem; color: var(--muted); line-height: 1.45; }
+.brand-sub { font-size: 1rem; color: var(--muted); line-height: 1.4; margin-top: 2px; }
 .site-nav { display: flex; flex-wrap: wrap; gap: 22px; }
 .site-nav a {
   font-size: .95rem; font-weight: 500; color: var(--muted);

@@ -6,7 +6,7 @@ Xu Lab 官网 · 全新上线包（2026-11-11 更新）
 
 【先验收内容】
   双击 index.html，用浏览器看四个页面：
-    index.html          首页（研究方向 / News 动态 / Join Us）
+    index.html          首页（配图 / 研究方向 / News 动态）
     people.html         成员（PI 履历 + Lab Alumni 毕业生板块）
     publications.html   论文 38 篇，按年份分组，每条带 DOI 链接，页内有年份跳转
     contact.html        联系方式

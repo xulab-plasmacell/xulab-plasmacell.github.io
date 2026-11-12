@@ -292,6 +292,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
 }
 .contact-row .email-text { font-size: 1.18rem; font-weight: 600; margin: 0; letter-spacing: .01em; }
 .contact-action { margin: 10px 0 0; font-size: .9rem; }
+/* how to say the PI's name - intentionally quiet */
+.name-note { margin: 0; font-size: .95rem; color: var(--muted); line-height: 1.55; }
 @media (max-width: 640px) {
   .contact-row { grid-template-columns: 1fr; gap: 2px; padding: 20px 22px; }
   .contact-row h2 { margin: 0 0 6px; }

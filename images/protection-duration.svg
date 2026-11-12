@@ -1,9 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 480" width="880" height="480" role="img" aria-labelledby="t4 d4">
 <title id="t4">How long each vaccine protects</title>
-<desc id="d4">Horizontal bars showing typical duration of protection: smallpox beyond a lifetime, measles decades, HPV ten years and counting, tetanus about ten years, influenza and COVID-19 only a few months.</desc>
+<desc id="d4">Horizontal bars showing the typical duration of vaccine-induced protection: smallpox vaccine beyond a lifetime, measles vaccine decades, HPV vaccine ten years and counting, tetanus vaccine about ten years, influenza and COVID-19 vaccines only a few months.</desc>
 <rect width="880" height="480" fill="#fffdf9"/>
-<text x="32" y="50" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="700" fill="#1b2733">One immune system, very different lifespans</text>
-<text x="32" y="78" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif" font-size="14" fill="#5c6b7a">Typical duration of protection on one linear scale &#8212; note how short the last two are</text>
+<text x="440" y="50" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="700" fill="#1b2733">One immune system, very different lifespan of protection</text>
 
 <g stroke="#eef1f4" stroke-width="1.2" stroke-dasharray="2 7">
   <line x1="250" y1="104" x2="250" y2="410"/>
@@ -14,12 +13,12 @@
 </g>
 
 <g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif" font-size="15" fill="#1b2733" text-anchor="end">
-  <text x="232" y="137">Smallpox</text>
-  <text x="232" y="189">Measles</text>
-  <text x="232" y="241">HPV</text>
-  <text x="232" y="293">Tetanus</text>
-  <text x="232" y="345">Influenza</text>
-  <text x="232" y="397">COVID-19</text>
+  <text x="232" y="137">Smallpox vaccine</text>
+  <text x="232" y="189">Measles vaccine</text>
+  <text x="232" y="241">HPV vaccine</text>
+  <text x="232" y="293">Tetanus vaccine</text>
+  <text x="232" y="345">Influenza vaccine</text>
+  <text x="232" y="397">COVID-19 vaccine</text>
 </g>
 
 <rect x="250" y="120" width="470" height="24" rx="8" fill="#2f7a63"/>
@@ -45,6 +44,5 @@
 <g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#5c6b7a" text-anchor="middle">
   <text x="250" y="438">0</text><text x="367" y="438">10</text><text x="485" y="438">20</text><text x="602" y="438">30</text><text x="720" y="438">40</text>
 </g>
-<text x="720" y="462" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#5c6b7a">years of protection</text>
-<text x="32" y="462" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif" font-size="12" fill="#5c6b7a">Schematic summary of published durability data.</text>
+<text x="440" y="462" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0b5a8f">Typical duration of vaccine-induced protection (years)</text>
 </svg>

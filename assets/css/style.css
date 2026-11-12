@@ -148,6 +148,16 @@ h2 { font-size: 1.35rem; margin: 0 0 var(--space-2); padding-bottom: var(--space
   display: flex; flex-direction: column; align-items: flex-start;
 }
 .avatar { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; margin-bottom: 14px; }
+/* --- 01 圆形浮标 · 曲线环绕（PI 卡片） --- */
+.person-lead { display: block; }
+.person-lead .avatar {
+  float: left; width: 168px; height: 168px; border-radius: 50%; object-fit: cover;
+  shape-outside: circle(50%); shape-margin: 12px; margin: 2px 20px 10px 0;
+  border: 3px solid #fff; box-shadow: 0 0 0 1px var(--accent), 0 3px 10px rgba(11,90,143,.12);
+}
+@media (max-width: 480px) {
+  .person-lead .avatar { float: none; shape-outside: none; display: block; margin: 0 auto 16px; }
+}
 .avatar-placeholder {
   display: flex; align-items: center; justify-content: center;
   background: var(--avatar-bg); color: var(--accent); font-size: 1.9rem; font-weight: 700;

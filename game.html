@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230b5a8f'/><text x='16' y='23' font-family='Arial,sans-serif' font-size='17' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>">
+<meta name="description" content="Play Conway's Game of Life and change what a cell needs to survive. A niche game about the local conditions that decide whether a cell persists, from the Xu Lab, Sun Yat-sen University.">
+<link rel="canonical" href="https://plasmacells.org/game.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Game | Xu Lab | Plasma Cell Biology, Sun Yat-sen University">
+<meta property="og:description" content="Conway's Game of Life, with editable survival rules. A niche game about the conditions that keep a cell alive.">
+<meta property="og:url" content="https://plasmacells.org/game.html">
+<meta name="twitter:card" content="summary">
+<title>Game | Xu Lab | Plasma Cell Biology, Sun Yat-sen University</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Game | Xu Lab","url":"https://plasmacells.org/game.html","about":{"@type":"Organization","name":"Xu Lab","url":"https://plasmacells.org/"}}
+</script>
+<style>
+/* ---------- Game stage: dark instrument panel, scoped to .game-shell ---------- */
+.game-stage { max-width: 1120px; margin: 0 auto var(--space-4); padding: 0 24px; }
+.game-shell {
+  background: #0b0d17;
+  border-radius: 24px;
+  padding: 20px;
+  border: 1px solid #2d3349;
+  box-shadow: 0 18px 36px rgba(11, 90, 143, .14);
+}
+.game-shell, .game-shell * {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+.game-shell .main-panel {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.game-shell .canvas-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 600px;
+  min-width: 0;
+  max-width: 700px;
+}
+.game-shell canvas {
+  background: #0f1322;
+  border-radius: 16px;
+  box-shadow: inset 0 0 0 1px #2f354a, 0 10px 20px rgba(0, 0, 0, .45);
+  width: 100%;
+  max-width: 680px;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  display: block;
+  touch-action: manipulation;
+  cursor: crosshair;
+}
+.game-shell .canvas-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 10px;
+  margin-top: 16px;
+}
+.game-shell button {
+  background: #262d44;
+  color: #e2e9ff;
+  font-size: .9rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 40px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .4);
+  transition: all .15s;
+  border: 1px solid #3f475e;
+}
+.game-shell button:hover {
+  background: #2f3857;
+  transform: translateY(-2px);
+  border-color: #5f6b91;
+  color: #fff;
+}
+.game-shell button.small-btn { padding: 6px 12px; font-size: .82rem; margin-left: 4px; }
+.game-shell .slider-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1b2137;
+  padding: 5px 16px;
+  border-radius: 40px;
+  border: 1px solid #2f354a;
+}
+.game-shell .slider-group label { color: #9aa4c9; font-size: .84rem; white-space: nowrap; }
+.game-shell input[type=range] { width: 104px; background: transparent; accent-color: #5f7bdc; }
+.game-shell .density-selector {
+  display: flex;
+  gap: 6px;
+  background: #1b2137;
+  padding: 4px 6px;
+  border-radius: 40px;
+  border: 1px solid #2f354a;
+  align-items: center;
+}
+.game-shell .density-selector select {
+  background: #262d44;
+  border: 1px solid #404b70;
+  color: #d3ddff;
+  padding: 6px 8px;
+  border-radius: 30px;
+  font-size: .82rem;
+}
+.game-shell .rule-panel {
+  background: #131826;
+  border-radius: 20px;
+  padding: 18px;
+  flex: 0 0 352px;
+  width: 352px;
+  border: 1px solid #2f354a;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .6);
+}
+.game-shell .rule-panel h3 {
+  margin: 0 0 14px 0;
+  color: #b7c3f0;
+  font-weight: 500;
+  font-size: 1.2rem;
+  letter-spacing: .04em;
+  border-bottom: 1px dashed #3f4868;
+  padding-bottom: 8px;
+}
+.game-shell .rule-box { background: #0e1322; border-radius: 16px; padding: 14px; margin-bottom: 14px; }
+.game-shell .rule-row { display: flex; gap: 10px; }
+.game-shell .rule-col { flex: 1; min-width: 0; }
+.game-shell .rule-type {
+  color: #b1c1f0;
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: .95rem;
+  text-align: center;
+}
+.game-shell .checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  justify-items: center;
+}
+.game-shell .checkbox-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1b2139;
+  padding: 5px 0;
+  border-radius: 14px;
+  width: 100%;
+  border: 1px solid #303858;
+}
+.game-shell .checkbox-item label { color: #a7b5e6; font-size: .78rem; margin-bottom: 2px; }
+.game-shell .checkbox-item input[type=checkbox] { width: 17px; height: 17px; accent-color: #5f7bdc; }
+.game-shell .preset-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.game-shell .preset-col { flex: 1 1 150px; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.game-shell .preset-col select {
+  background: #1b2139;
+  border: 1px solid #404b70;
+  color: #d3ddff;
+  padding: 8px 10px;
+  border-radius: 40px;
+  font-size: .85rem;
+  width: 100%;
+  min-width: 0;
+}
+.game-shell .preset-col .btn-row { display: flex; justify-content: flex-end; }
+.game-shell .save-load-row { display: flex; gap: 10px; margin-top: 14px; justify-content: space-between; }
+.game-shell .save-load-row button { flex: 1; background: #2f3857; font-size: .85rem; padding: 8px 0; }
+.game-shell .jump-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  align-items: center;
+  background: #1b2137;
+  padding: 8px 12px;
+  border-radius: 40px;
+  border: 1px solid #2f354a;
+}
+.game-shell .jump-row input {
+  background: #0e1322;
+  border: 1px solid #404b70;
+  color: #d3ddff;
+  padding: 6px 10px;
+  border-radius: 30px;
+  width: 80px;
+  font-size: .85rem;
+  text-align: center;
+}
+.game-shell .jump-row button { padding: 6px 12px; font-size: .82rem; margin: 0; flex: 1; }
+.game-shell .info-note {
+  color: #7d89b4;
+  font-size: .82rem;
+  text-align: left;
+  margin-top: 12px;
+  border-top: 1px solid #232b44;
+  padding-top: 12px;
+  line-height: 1.6;
+}
+.game-shell .info-note strong { color: #b7c3f0; }
+.game-shell .footer-desc {
+  background: #0e1322;
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin-top: 18px;
+  border: 1px solid #2d334f;
+  font-size: .86rem;
+  color: #9aa9d9;
+  line-height: 1.6;
+}
+.game-shell .footer-desc strong { color: #b7c3f0; }
+.game-shell #loadFileInput { display: none; }
+
+@media (max-width: 900px) {
+  .game-stage { padding: 0 16px; }
+  .game-shell { padding: 14px; border-radius: 18px; }
+  .game-shell .rule-panel { flex: 1 1 100%; width: 100%; }
+  .game-shell .canvas-area { flex: 1 1 100%; max-width: 100%; }
+}
+
+/* ---------- Page prose: guide tables, scoped to this page ---------- */
+.gtable { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 8px 0 20px; font-size: .93rem; }
+.gtable caption { text-align: left; font-family: var(--serif); font-size: 1rem; color: var(--ink); padding: 0 0 8px; }
+.gtable th, .gtable td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.gtable th { font-family: var(--serif); font-weight: 600; color: var(--ink); background: var(--paper); font-size: .9rem; letter-spacing: .01em; }
+.gtable td:first-child { width: 27%; font-weight: 600; color: var(--accent-deep); }
+.gtable tr:last-child td { border-bottom: none; }
+.game-caption { font-size: .9rem; color: var(--warm-deep); border-left: 3px solid var(--accent-soft); padding-left: 14px; margin: 18px 0 0; }
+.h1-alias { font-size: .55em; font-weight: 400; color: var(--muted); letter-spacing: 0; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap masthead">
+<a class="brand" href="index.html"><span class="brand-name">Xu Lab@Long-Lived Plasma Cells</span></a>
+<nav class="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="people.html">People</a><a href="publications.html">Publications</a><a href="gallery.html">Gallery</a><a href="game.html" class="active">Game</a><a href="contact.html">Contact</a></nav>
+</div></header>
+<main id="main">
+<section class="wrap page-head">
+<h1>Game <span class="h1-alias">(Conway&rsquo;s Game of Life)</span></h1>
+<p class="lede">A niche game about the conditions that keep a cell alive.</p>
+</section>
+
+<section class="wrap section">
+<h2>Why a niche game belongs on this site</h2>
+<p>The Game of Life is a niche game in the precise sense: no score, no opponent, no ending. Its audience is small, its rules fit on one line, and its rewards are observational &mdash; you watch a rule system unfold and learn to recognise the structures it permits. It is less a game of play than a game of conditions. The same five-cell seed can vanish, oscillate or travel forever, and which one happens depends entirely on the local configuration of neighbours around each cell.</p>
+<p>Plasma cells obey the same logic. A long-lived plasma cell is not immortal in itself; it persists because it occupies a niche &mdash; a specific address in the bone marrow where stromal cells, chemokines and survival factors hold it alive. Take the same cell out of that address and it is gone within days. In the Game of Life a cell&rsquo;s fate is decided the same way, by how many neighbours surround it: two or three and it survives, zero or one and it dies of isolation, four or more and it dies of crowding. Conway&rsquo;s B3/S23 is, literally, a niche definition &mdash; a narrow band of local conditions that permits persistence and nothing more.</p>
+<p>That is why the page is here. Every preset in the menu is a different niche: the same starting pattern, placed under different survival conditions, will thrive, freeze or collapse. Switching presets is the cheapest experiment we know for the question our laboratory actually asks &mdash; how much of a cell&rsquo;s lifespan is written into the cell, and how much is written into where it lives.</p>
+</section>
+
+<div class="game-stage">
+<div class="game-shell">
+<div class="main-panel">
+<!-- Canvas and playback controls -->
+<div class="canvas-area">
+<canvas id="gameCanvas" width="800" height="600" role="img" aria-label="Game of Life grid, 80 columns by 60 rows. Click any cell to switch it between alive and dead."></canvas>
+<div class="canvas-controls">
+<button id="playPauseBtn" type="button">&#9654; Start</button>
+<button id="stepBtn" type="button">&#9193; Step</button>
+
+<div class="density-selector">
+<select id="densitySelect" aria-label="Starting density for the Random button">
+<option value="0.05">Low density (5%)</option>
+<option value="0.15" selected>Medium density (15%)</option>
+<option value="0.30">High density (30%)</option>
+</select>
+<button id="randomBtn" type="button">&#127922; Random</button>
+</div>
+
+<button id="clearBtn" type="button">Clear</button>
+<div class="slider-group">
+<label for="speedSlider">Speed</label>
+<input type="range" id="speedSlider" min="5" max="500" value="100" step="5">
+</div>
+<div class="slider-group">
+<label for="sizeSlider">Cell size</label>
+<input type="range" id="sizeSlider" min="4" max="20" value="10" step="1">
+</div>
+</div>
+
+<div class="footer-desc">
+<strong>How the rules read</strong> &middot; <strong>S (survive)</strong>: the number of neighbours a living cell needs in order to stay alive. <strong>B (born)</strong>: the number a dead cell needs in order to come to life.
+</div>
+</div>
+
+<!-- Rules and patterns -->
+<div class="rule-panel">
+<h3>Custom rules</h3>
+<div class="rule-box">
+<div class="rule-row">
+<div class="rule-col">
+<div class="rule-type">&#128308; Survive (S)</div>
+<div class="checkbox-grid" id="survivalRules"></div>
+</div>
+<div class="rule-col">
+<div class="rule-type">&#128994; Born (B)</div>
+<div class="checkbox-grid" id="birthRules"></div>
+</div>
+</div>
+</div>
+
+<div class="preset-row">
+<div class="preset-col">
+<select id="presetSelect" aria-label="Rule preset">
+<option value="b3s23">Conway's Game of Life (B3/S23)</option>
+<option value="b2s3">B2/S3 &mdash; low threshold</option>
+<option value="b3s012345678">Life without Death (B3/S012345678)</option>
+<option value="b36s23">HighLife (B36/S23)</option>
+<option value="b35s23">B35/S23 &mdash; dense</option>
+<option value="b2s23">B2/S23 &mdash; fast spread</option>
+</select>
+<div class="btn-row">
+<button id="applyRuleBtn" class="small-btn" type="button">Apply</button>
+</div>
+</div>
+<div class="preset-col">
+<select id="shapeSelect" aria-label="Pattern to place">
+<option value="glider">Glider</option>
+<option value="lwss">Lightweight spaceship (LWSS)</option>
+<option value="mwss">Middleweight spaceship (MWSS)</option>
+<option value="hwss">Heavyweight spaceship (HWSS)</option>
+<option value="blinker">Blinker</option>
+<option value="block">Block</option>
+<option value="beehive">Beehive</option>
+<option value="pulsar">Pulsar</option>
+<option value="pentomino">R-pentomino</option>
+<option value="cross">Cross</option>
+<option value="gosper">Gosper glider gun</option>
+</select>
+<div class="btn-row">
+<button id="placeShapeBtn" class="small-btn" type="button">Place</button>
+</div>
+</div>
+</div>
+
+<div class="save-load-row">
+<button id="saveBtn" type="button">Save settings</button>
+<button id="loadBtn" type="button">Load settings</button>
+</div>
+<input type="file" id="loadFileInput" accept=".json,application/json">
+
+<div class="jump-row">
+<input type="number" id="jumpInput" min="0" value="0" step="1" aria-label="Generation to jump to">
+<button id="jumpBtn" type="button">Jump</button>
+</div>
+
+<div class="info-note">
+<strong>Manual editing</strong>: click any cell to switch it between alive and dead.<br>
+<strong>Resizing</strong>: the existing pattern is kept from the top-left corner; new area starts empty.<br>
+<strong>Counters</strong>: the bottom-left of the canvas shows the generation, the live cell count and the starting cell count.<br>
+<strong>Full guide</strong>: every control is explained below the panel.
+</div>
+</div>
+</div>
+</div>
+<p class="game-caption">No score, no opponent, no ending &mdash; only rules and the local neighbourhood of each cell.</p>
+</div>
+
+<section class="wrap section">
+<h2>How to use this page</h2>
+<p>There is nothing to win here. The canvas is a grid of cells, some alive and some dead; each step recomputes every cell from the state of its eight neighbours, and nothing else. What you control is the rule that decides the outcome, and the starting pattern that the rule acts on.</p>
+
+<table class="gtable">
+<caption>Playback and the canvas</caption>
+<thead><tr><th>Control</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td>Start / Pause</td><td>Runs the simulation, advancing one generation every <em>Speed</em> milliseconds. The button label switches to <em>Pause</em> while it runs. Changing a rule does not affect a running simulation until you apply it &mdash; see <em>Apply</em> below.</td></tr>
+<tr><td>Step</td><td>Pauses the simulation, then advances exactly one generation. Use it to watch a single pattern move or oscillate frame by frame.</td></tr>
+<tr><td>Clicking the canvas</td><td>Switches one cell between alive and dead. Manual edits do not reset the generation counter and do not change the stored starting pattern, so an edited cell will be overwritten if you later use <em>Jump</em>.</td></tr>
+<tr><td>Random</td><td>Fills the whole grid at the density chosen in the menu to its left (5%, 15% or 30%). The new grid becomes generation 0, and the starting cell count is reset to whatever it now holds.</td></tr>
+<tr><td>Clear</td><td>Empties the grid, resets the generation to 0 and sets the starting cell count to 0. This is the cleanest way to start drawing a pattern by hand.</td></tr>
+<tr><td>Speed</td><td>Delay between generations, from 5 ms to 500 ms. Lower is faster. Dragging it while the simulation runs restarts the loop but does not reset the generation counter.</td></tr>
+<tr><td>Cell size</td><td>Changes the size of a cell, which in practice changes the grid resolution: the canvas is fixed at 800 &times; 600 pixels, so a cell size of 10 gives 80 &times; 60 cells and a size of 20 gives 40 &times; 30. Existing content is kept in the top-left corner, new area is left empty, and the generation resets to 0 with the resized grid taken as the new starting point.</td></tr>
+</tbody>
+</table>
+
+<table class="gtable">
+<caption>Rules: the two checkboxes, the preset menu and Apply</caption>
+<thead><tr><th>Control</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td>Survive (S) checkboxes</td><td>Select the neighbour counts at which a <em>living</em> cell survives. With 2 and 3 ticked, a living cell with two or three neighbours stays alive and dies at any other count.</td></tr>
+<tr><td>Born (B) checkboxes</td><td>Select the neighbour counts at which a <em>dead</em> cell becomes alive. With only 3 ticked, a dead cell is born when exactly three of its neighbours are alive.</td></tr>
+<tr><td>Apply</td><td>Takes the current state of all eighteen checkboxes and writes it into the rule the simulation uses, then redraws. It does <strong>not</strong> clear the canvas, does <strong>not</strong> reset the generation counter and does <strong>not</strong> change the stored starting pattern &mdash; the picture looks identical until the next step, because rules decide the next generation, not the current one. <strong>Ticked boxes have no effect until you press Apply</strong>; if you tick a box and press Start, the simulation still uses the previous rule.</td></tr>
+<tr><td>Rule preset menu</td><td>Applies a named rule immediately on selection &mdash; no Apply needed. It rewrites the checkboxes to match, so you can see exactly which counts the preset uses, then adjust them from there.</td></tr>
+</tbody>
+</table>
+
+<table class="gtable">
+<caption>Patterns, files and jumping</caption>
+<thead><tr><th>Control</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td>Place</td><td>Drops the selected pattern at the <strong>centre of the canvas</strong>; there is no drag-and-drop and no click-to-position in this build. It pauses the simulation first, clears the rectangular area the pattern will occupy (erasing any cells already there), writes the pattern, then treats the result as a new generation 0 and resets the counter. To place a pattern somewhere else, clear the canvas and draw it by hand, or edit the saved JSON file.</td></tr>
+<tr><td>Save settings</td><td>Downloads a JSON file containing the grid size, the speed, the full S and B rule sets and the entire cell grid, named with a timestamp. Nothing is stored on a server; the file is the only copy.</td></tr>
+<tr><td>Load settings</td><td>Reads such a file back, checking that the required fields exist and that the grid dimensions match the declared size, and rejects the file with a message if they do not. The loaded grid becomes generation 0, the counter resets and the speed slider follows the file.</td></tr>
+<tr><td>Jump</td><td>Recomputes the requested generation from the stored starting pattern, without animating the intermediate steps, and stops the simulation. The value must be a whole number of zero or greater. There is no upper limit, so a very large number will genuinely compute that many generations and the page will freeze for a moment.</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="wrap section">
+<h2>Rules and presets</h2>
+<p>Six rules are provided. Each is written as <strong>B</strong><em>counts</em>/<strong>S</strong><em>counts</em>: the neighbour counts that create a cell, followed by the counts that keep one alive. Changing the rule is the whole experiment &mdash; the same starting pattern will thrive, freeze or vanish depending on which numbers appear here.</p>
+
+<table class="gtable">
+<thead><tr><th>Preset</th><th>What happens</th><th>When to choose it</th></tr></thead>
+<tbody>
+<tr><td>Conway's Game of Life (B3/S23)</td><td>The original rule from 1970. A living cell survives with two or three neighbours and dies of isolation or crowding otherwise; a dead cell is born with exactly three. It is balanced enough to sustain motion: gliders travel, blinkers oscillate, guns emit.</td><td>Start here. Every pattern in the menu is meant to be seen under this rule first, and it is the only rule in which the classic figures behave as their names suggest.</td></tr>
+<tr><td>B2/S3 &mdash; low threshold</td><td>Birth needs only two neighbours instead of three, so growth starts far more easily. Populations expand quickly and then stall into large empty regions separated by thin walls.</td><td>When you want to see how a lower birth threshold changes the character of growth: faster ignition, earlier saturation.</td></tr>
+<tr><td>Life without Death (B3/S012345678)</td><td>Every living cell survives at any neighbour count from 0 to 8, so nothing ever dies; cells are only ever added, and only where exactly three neighbours meet. Patterns crystallise permanently and grow outward in a fixed texture.</td><td>To demonstrate growth without decay. It makes the point that &ldquo;survival&rdquo; is a rule, not a property of the cell.</td></tr>
+<tr><td>HighLife (B36/S23)</td><td>Conway's rule plus birth at six neighbours. The extra condition admits a replicator, a small figure that copies itself indefinitely.</td><td>To show that one extra number in the rule can create an entirely new class of behaviour.</td></tr>
+<tr><td>B35/S23 &mdash; dense</td><td>Birth at five neighbours as well as three. Patterns grow thicker and blockier, with compact masses replacing the delicate structures of B3/S23.</td><td>To compare a permissive but not explosive rule against the classic one.</td></tr>
+<tr><td>B2/S23 &mdash; fast spread</td><td>Birth at two neighbours while survival still requires two or three. Growth is faster than Conway's and tends to form bands and streaks rather than isolated figures.</td><td>To watch the effect of lowering the birth threshold alone, keeping survival unchanged. Compare it directly with B2/S3 above to see what the survival rule contributes.</td></tr>
+</tbody>
+</table>
+</section>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p class="footer-name">Xu Lab &middot; Zhongshan School of Medicine, Sun Yat-sen University <span class="footer-tagline">&middot; Humoral immune memory, long-lived plasma cells and durable vaccine protection</span></p>
+<p class="footer-meta">&copy; 2026 Xu Lab. All rights reserved. &middot; contact (at) plasmacells.org</p>
+</div></footer>
+<script>
+(function () {
+  'use strict';
+
+  var canvas = document.getElementById('gameCanvas');
+  var ctx = canvas.getContext('2d');
+
+  var cols = 80;
+  var rows = 60;
+
+  var survivalSet = new Set([2, 3]);
+  var birthSet = new Set([3]);
+
+  var grid = [];          // current grid
+  var initialGrid = [];   // copy of generation 0, used by Jump and by the starting-cell counter
+  var animationId = null;
+  var playing = false;
+  var speedMs = 100;
+  var generation = 0;
+
+  /* Build the grid, optionally filled at random. */
+  function initGrid(rand, density) {
+    rand = !!rand;
+    density = typeof density === 'number' ? density : 0.15;
+    grid = Array(rows).fill().map(function () { return Array(cols).fill(false); });
+    if (rand) {
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          grid[r][c] = Math.random() < density;
+        }
+      }
+    }
+    updateInitialFromCurrent();
+  }
+  initGrid(true, 0.15);
+
+  /* Treat the current grid as the new generation 0. */
+  function updateInitialFromCurrent() {
+    initialGrid = grid.map(function (row) { return row.slice(); });
+  }
+
+  function countLiveCells(g) {
+    var cnt = 0;
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        if (g[r][c]) cnt++;
+      }
+    }
+    return cnt;
+  }
+
+  /* Count the eight neighbours of a cell. Edges are not wrapped. */
+  function countNeighbors(row, col, sourceGrid) {
+    sourceGrid = sourceGrid || grid;
+    var count = 0;
+    for (var dr = -1; dr <= 1; dr++) {
+      for (var dc = -1; dc <= 1; dc++) {
+        if (dr === 0 && dc === 0) continue;
+        var nr = row + dr;
+        var nc = col + dc;
+        if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && sourceGrid[nr][nc]) {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
+  function nextGenerationFrom(sourceGrid) {
+    var next = Array(rows).fill().map(function () { return Array(cols).fill(false); });
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        var neighbors = countNeighbors(r, c, sourceGrid);
+        if (sourceGrid[r][c]) {
+          next[r][c] = survivalSet.has(neighbors);
+        } else {
+          next[r][c] = birthSet.has(neighbors);
+        }
+      }
+    }
+    return next;
+  }
+
+  function computeNextGeneration() {
+    grid = nextGenerationFrom(grid);
+  }
+
+  /* Draw cells, grid lines and the two counters. */
+  function drawGrid() {
+    var cellW = canvas.width / cols;
+    var cellH = canvas.height / rows;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#b1e5f7';
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        if (grid[r][c]) {
+          ctx.fillRect(c * cellW, r * cellH, cellW - 0.5, cellH - 0.5);
+        }
+      }
+    }
+
+    ctx.strokeStyle = '#3a405b';
+    ctx.lineWidth = 0.6;
+    for (var i = 0; i <= cols; i++) {
+      ctx.beginPath();
+      ctx.moveTo(i * cellW, 0);
+      ctx.lineTo(i * cellW, canvas.height);
+      ctx.stroke();
+    }
+    for (var j = 0; j <= rows; j++) {
+      ctx.beginPath();
+      ctx.moveTo(0, j * cellH);
+      ctx.lineTo(canvas.width, j * cellH);
+      ctx.stroke();
+    }
+
+    ctx.font = 'bold 22px monospace';
+    ctx.fillStyle = '#ff5555';
+    ctx.shadowColor = '#aa0000';
+    ctx.shadowBlur = 8;
+
+    ctx.fillText('Gen ' + generation, 20, canvas.height - 70);
+    var liveNow = countLiveCells(grid);
+    var liveInit = countLiveCells(initialGrid);
+    ctx.fillText('Cells ' + liveNow + ' / ' + liveInit, 20, canvas.height - 30);
+
+    ctx.shadowBlur = 0;
+  }
+
+  function step() {
+    computeNextGeneration();
+    generation++;
+    drawGrid();
+  }
+
+  function gameLoop() {
+    if (!playing) return;
+    step();
+    animationId = setTimeout(gameLoop, speedMs);
+  }
+
+  function startGame() {
+    if (playing) return;
+    playing = true;
+    document.getElementById('playPauseBtn').innerHTML = '&#10074;&#10074; Pause';
+    if (animationId) clearTimeout(animationId);
+    gameLoop();
+  }
+
+  function pauseGame() {
+    playing = false;
+    document.getElementById('playPauseBtn').innerHTML = '&#9654; Start';
+    if (animationId) {
+      clearTimeout(animationId);
+      animationId = null;
+    }
+  }
+
+  function togglePlay() {
+    if (playing) pauseGame();
+    else startGame();
+  }
+
+  function resetGeneration() {
+    generation = 0;
+    drawGrid();
+  }
+
+  /* Render the eighteen rule checkboxes from the current sets. */
+  function renderCheckboxes() {
+    var survivalDiv = document.getElementById('survivalRules');
+    var birthDiv = document.getElementById('birthRules');
+    survivalDiv.innerHTML = '';
+    birthDiv.innerHTML = '';
+
+    for (var i = 0; i <= 8; i++) {
+      var survItem = document.createElement('div');
+      survItem.className = 'checkbox-item';
+      survItem.innerHTML = '<label>' + i + '</label><input type="checkbox" class="survive-cb" value="' + i + '"' + (survivalSet.has(i) ? ' checked' : '') + '>';
+      survivalDiv.appendChild(survItem);
+
+      var birthItem = document.createElement('div');
+      birthItem.className = 'checkbox-item';
+      birthItem.innerHTML = '<label>' + i + '</label><input type="checkbox" class="birth-cb" value="' + i + '"' + (birthSet.has(i) ? ' checked' : '') + '>';
+      birthDiv.appendChild(birthItem);
+    }
+  }
+
+  /* Read the checkboxes into the rule sets. Called by Apply. */
+  function updateRulesFromCheckboxes() {
+    var survChecks = document.querySelectorAll('.survive-cb:checked');
+    var birthChecks = document.querySelectorAll('.birth-cb:checked');
+    survivalSet.clear();
+    birthSet.clear();
+    survChecks.forEach(function (cb) { survivalSet.add(parseInt(cb.value, 10)); });
+    birthChecks.forEach(function (cb) { birthSet.add(parseInt(cb.value, 10)); });
+  }
+
+  /* Change the resolution. Existing content is kept from the top-left corner. */
+  function resizeGrid(newCols, newRows) {
+    var oldGrid = grid;
+    var oldRows = rows;
+    var oldCols = cols;
+    var newGrid = Array(newRows).fill().map(function () { return Array(newCols).fill(false); });
+    for (var r = 0; r < Math.min(oldRows, newRows); r++) {
+      for (var c = 0; c < Math.min(oldCols, newCols); c++) {
+        newGrid[r][c] = oldGrid[r][c];
+      }
+    }
+    grid = newGrid;
+    cols = newCols;
+    rows = newRows;
+    updateInitialFromCurrent();
+    resetGeneration();
+  }
+
+  /* Parse a rule string such as "b3s23" and apply it. */
+  function setPreset(ruleString) {
+    var match = ruleString.match(/b([0-8]*)s([0-8]*)/i);
+    if (match) {
+      var birthStr = match[1];
+      var survStr = match[2];
+      birthSet.clear();
+      survivalSet.clear();
+      for (var i = 0; i < birthStr.length; i++) birthSet.add(parseInt(birthStr.charAt(i), 10));
+      for (var j = 0; j < survStr.length; j++) survivalSet.add(parseInt(survStr.charAt(j), 10));
+      renderCheckboxes();
+      drawGrid();
+    }
+  }
+
+  /* Pattern library. Coordinates are [row, column] offsets. */
+  var shapes = {
+    glider: [[0, 1], [1, 2], [2, 0], [2, 1], [2, 2]],
+    blinker: [[1, 0], [1, 1], [1, 2]],
+    block: [[0, 0], [0, 1], [1, 0], [1, 1]],
+    beehive: [[1, 0], [2, 0], [0, 1], [3, 1], [1, 2], [2, 2]],
+    pulsar: (function () {
+      var coords = [];
+      for (var i = -2; i <= 2; i++) {
+        coords.push([i, 0]);
+        coords.push([0, i]);
+      }
+      return coords;
+    })(),
+    lwss: [
+      [1, 0], [2, 0], [3, 0], [4, 0],
+      [0, 1], [4, 1],
+      [4, 2],
+      [0, 3], [3, 3]
+    ],
+    mwss: [
+      [1, 0], [2, 0], [3, 0], [4, 0],
+      [0, 1], [4, 1],
+      [4, 2],
+      [0, 3], [3, 3], [4, 3]
+    ],
+    hwss: [
+      [1, 0], [2, 0], [3, 0], [4, 0],
+      [0, 1], [4, 1],
+      [4, 2],
+      [0, 3], [3, 3], [4, 3],
+      [0, 4]
+    ],
+    pentomino: [
+      [1, 0], [2, 0],
+      [0, 1], [1, 1],
+      [1, 2]
+    ],
+    cross: [
+      [0, 1], [1, 0], [1, 1], [1, 2], [2, 1]
+    ],
+    gosper: [
+      [4, 0], [5, 0], [4, 1], [5, 1],
+      [3, 10], [4, 10], [5, 10], [6, 10],
+      [2, 11], [7, 11],
+      [1, 12], [8, 12],
+      [1, 13], [8, 13],
+      [4, 14], [5, 14],
+      [2, 15], [6, 15],
+      [3, 16], [4, 16], [5, 16], [6, 16],
+      [4, 17], [5, 17]
+    ]
+  };
+
+  /* Place a pattern at the centre of the canvas. */
+  function placeShape(shapeName) {
+    var shapeCoords = shapes[shapeName];
+    if (!shapeCoords) return;
+
+    var minR = Infinity, maxR = -Infinity, minC = Infinity, maxC = -Infinity;
+    shapeCoords.forEach(function (pair) {
+      minR = Math.min(minR, pair[0]);
+      maxR = Math.max(maxR, pair[0]);
+      minC = Math.min(minC, pair[1]);
+      maxC = Math.max(maxC, pair[1]);
+    });
+    var height = maxR - minR + 1;
+    var width = maxC - minC + 1;
+
+    var centerRow = Math.floor(rows / 2);
+    var centerCol = Math.floor(cols / 2);
+    var startRow = centerRow - Math.floor(height / 2);
+    var startCol = centerCol - Math.floor(width / 2);
+
+    pauseGame();
+
+    for (var r = Math.max(0, startRow); r < Math.min(rows, startRow + height); r++) {
+      for (var c = Math.max(0, startCol); c < Math.min(cols, startCol + width); c++) {
+        grid[r][c] = false;
+      }
+    }
+
+    shapeCoords.forEach(function (pair) {
+      var rr = startRow + pair[0] - minR;
+      var cc = startCol + pair[1] - minC;
+      if (rr >= 0 && rr < rows && cc >= 0 && cc < cols) {
+        grid[rr][cc] = true;
+      }
+    });
+
+    updateInitialFromCurrent();
+    resetGeneration();
+  }
+
+  /* ---------- Save ---------- */
+  function saveConfig() {
+    var config = {
+      version: '1.0',
+      cols: cols,
+      rows: rows,
+      speedMs: speedMs,
+      survival: Array.from(survivalSet),
+      birth: Array.from(birthSet),
+      grid: grid.map(function (row) { return row.map(function (cell) { return cell ? 1 : 0; }); })
+    };
+    var jsonStr = JSON.stringify(config, null, 2);
+    var blob = new Blob([jsonStr], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'life-config-' + new Date().toISOString().slice(0, 19).replace(/:/g, '-') + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  /* ---------- Load ---------- */
+  function loadConfigFromFile(file) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      try {
+        var config = JSON.parse(e.target.result);
+        if (!config.cols || !config.rows || !Array.isArray(config.survival) || !Array.isArray(config.birth) || !Array.isArray(config.grid)) {
+          alert('Invalid configuration file: required fields are missing.');
+          return;
+        }
+        if (config.grid.length !== config.rows || config.grid[0].length !== config.cols) {
+          alert('The grid in this file does not match the size it declares.');
+          return;
+        }
+
+        pauseGame();
+
+        cols = config.cols;
+        rows = config.rows;
+        speedMs = config.speedMs || 100;
+        document.getElementById('speedSlider').value = speedMs;
+
+        survivalSet = new Set(config.survival);
+        birthSet = new Set(config.birth);
+
+        grid = config.grid.map(function (row) {
+          return row.map(function (val) { return val === 1; });
+        });
+
+        updateInitialFromCurrent();
+        renderCheckboxes();
+        resetGeneration();
+
+        var size = Math.floor(800 / cols);
+        document.getElementById('sizeSlider').value = Math.min(20, Math.max(4, size));
+
+        drawGrid();
+      } catch (err) {
+        alert('Could not read the configuration file: ' + err.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  /* ---------- Jump ---------- */
+  function jumpToGeneration(targetGen) {
+    if (!Number.isInteger(targetGen) || targetGen < 0) {
+      alert('Enter a whole number of zero or greater.');
+      return;
+    }
+    pauseGame();
+
+    var tempGrid = initialGrid.map(function (row) { return row.slice(); });
+    for (var i = 0; i < targetGen; i++) {
+      tempGrid = nextGenerationFrom(tempGrid);
+    }
+    grid = tempGrid;
+    generation = targetGen;
+    drawGrid();
+  }
+
+  /* Switch a single cell, given a viewport coordinate. */
+  function toggleCellAt(clientX, clientY) {
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = canvas.width / rect.width;
+    var scaleY = canvas.height / rect.height;
+    var cellW = canvas.width / cols;
+    var cellH = canvas.height / rows;
+    var col = Math.floor(((clientX - rect.left) * scaleX) / cellW);
+    var row = Math.floor(((clientY - rect.top) * scaleY) / cellH);
+    if (row >= 0 && row < rows && col >= 0 && col < cols) {
+      grid[row][col] = !grid[row][col];
+      drawGrid();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    renderCheckboxes();
+    drawGrid();
+
+    document.getElementById('playPauseBtn').addEventListener('click', togglePlay);
+
+    document.getElementById('stepBtn').addEventListener('click', function () {
+      pauseGame();
+      step();
+    });
+
+    document.getElementById('randomBtn').addEventListener('click', function () {
+      pauseGame();
+      var density = parseFloat(document.getElementById('densitySelect').value);
+      initGrid(true, density);
+      resetGeneration();
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', function () {
+      pauseGame();
+      initGrid(false);
+      resetGeneration();
+    });
+
+    document.getElementById('speedSlider').addEventListener('input', function (e) {
+      speedMs = parseInt(e.target.value, 10);
+      if (playing) {
+        pauseGame();
+        startGame();
+      }
+    });
+
+    document.getElementById('sizeSlider').addEventListener('input', function (e) {
+      var size = parseInt(e.target.value, 10);
+      var newCols = Math.floor(800 / size);
+      var newRows = Math.floor(600 / size);
+      pauseGame();
+      resizeGrid(newCols, newRows);
+    });
+
+    document.getElementById('applyRuleBtn').addEventListener('click', function () {
+      updateRulesFromCheckboxes();
+      drawGrid();
+    });
+
+    document.getElementById('presetSelect').addEventListener('change', function (e) {
+      setPreset(e.target.value);
+    });
+
+    document.getElementById('placeShapeBtn').addEventListener('click', function () {
+      placeShape(document.getElementById('shapeSelect').value);
+    });
+
+    document.getElementById('saveBtn').addEventListener('click', saveConfig);
+
+    document.getElementById('loadBtn').addEventListener('click', function () {
+      document.getElementById('loadFileInput').click();
+    });
+
+    document.getElementById('loadFileInput').addEventListener('change', function (e) {
+      var file = e.target.files[0];
+      if (file) loadConfigFromFile(file);
+      e.target.value = '';
+    });
+
+    document.getElementById('jumpBtn').addEventListener('click', function () {
+      var input = document.getElementById('jumpInput');
+      var target = parseInt(input.value, 10);
+      if (isNaN(target) || target < 0) {
+        alert('Enter a valid whole number of zero or greater.');
+        return;
+      }
+      jumpToGeneration(target);
+    });
+
+    canvas.addEventListener('mousedown', function (e) {
+      toggleCellAt(e.clientX, e.clientY);
+    });
+
+    canvas.addEventListener('touchstart', function (e) {
+      e.preventDefault();
+      if (e.changedTouches && e.changedTouches.length) {
+        toggleCellAt(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+      }
+    }, { passive: false });
+  });
+})();
+</script>
+</body>
+</html>

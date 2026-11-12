@@ -10,6 +10,7 @@
   --serif: Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
   --paper: #fcfbf8;
   --warm: #6f6455;
+  --warm-deep: #463e33;
   --warm-line: #d8d2c4;
   --dot: #b9cbdb;
   --avatar-bg: #dbe7f0;
@@ -194,7 +195,7 @@ address { font-style: normal; line-height: 1.8; }
 .footer-name { color: var(--ink); font-weight: 600; }
 .footer-tagline {
   font-family: var(--serif); font-style: italic;
-  color: var(--warm); font-weight: 400; font-size: .95em;
+  color: var(--warm-deep); font-weight: 400; font-size: .95em;
 }
 
 @media (max-width: 640px) {

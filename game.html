@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230b5a8f'/><text x='16' y='23' font-family='Arial,sans-serif' font-size='17' font-weight='bold' fill='white' text-anchor='middle'>X</text></svg>">
-<meta name="description" content="Play Conway's Game of Life and change what a cell needs to survive. A niche game about the local conditions that decide whether a cell persists, from the Xu Lab, Sun Yat-sen University.">
+<meta name="description" content="Play Conway&rsquo;s Game of Life and change what a cell needs to survive. A niche game about the local conditions that decide whether a cell persists, from the Xu Lab, Sun Yat-sen University.">
 <link rel="canonical" href="https://plasmacells.org/game.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Game | Xu Lab | Plasma Cell Biology, Sun Yat-sen University">
-<meta property="og:description" content="Conway's Game of Life, with editable survival rules. A niche game about the conditions that keep a cell alive.">
+<meta property="og:description" content="Conway&rsquo;s Game of Life, with editable survival rules. A niche game about the conditions that keep a cell alive.">
 <meta property="og:url" content="https://plasmacells.org/game.html">
 <meta name="twitter:card" content="summary">
 <title>Game | Xu Lab | Plasma Cell Biology, Sun Yat-sen University</title>
@@ -247,8 +247,8 @@
 
 <section class="wrap section">
 <h2>Why a niche game belongs on this site</h2>
-<p>The Game of Life is a niche game in the precise sense: no score, no opponent, no ending. Its audience is small, its rules fit on one line, and its rewards are observational &mdash; you watch a rule system unfold and learn to recognise the structures it permits. It is less a game of play than a game of conditions. The same five-cell seed can vanish, oscillate or travel forever, and which one happens depends entirely on the local configuration of neighbours around each cell.</p>
-<p>Plasma cells obey the same logic. A long-lived plasma cell is not immortal in itself; it persists because it occupies a niche &mdash; a specific address in the bone marrow where stromal cells, chemokines and survival factors hold it alive. Take the same cell out of that address and it is gone within days. In the Game of Life a cell&rsquo;s fate is decided the same way, by how many neighbours surround it: two or three and it survives, zero or one and it dies of isolation, four or more and it dies of crowding. Conway&rsquo;s B3/S23 is, literally, a niche definition &mdash; a narrow band of local conditions that permits persistence and nothing more.</p>
+<p>The Game of Life is a niche game in the precise sense: no score, no opponent, no ending. Its audience is small, its rules fit on one line, and its rewards are observational &mdash; you watch a rule system unfold and learn to recognize the structures it permits. It is less a game of play than a game of conditions. The same five-cell seed can vanish, oscillate or travel forever, and which one happens depends entirely on the local configuration of neighbors around each cell.</p>
+<p>Plasma cells obey the same logic. A long-lived plasma cell is not immortal in itself; it persists because it occupies a niche &mdash; a specific address in the bone marrow where stromal cells, chemokines and survival factors hold it alive. Take the same cell out of that address and it is gone within days. In the Game of Life a cell&rsquo;s fate is decided the same way, by how many neighbors surround it: two or three and it survives, zero or one and it dies of isolation, four or more and it dies of crowding. Conway&rsquo;s B3/S23 is, literally, a niche definition &mdash; a narrow band of local conditions that permits persistence and nothing more.</p>
 <p>That is why the page is here. Every preset in the menu is a different niche: the same starting pattern, placed under different survival conditions, will thrive, freeze or collapse. Switching presets is the cheapest experiment we know for the question our laboratory actually asks &mdash; how much of a cell&rsquo;s lifespan is written into the cell, and how much is written into where it lives.</p>
 </section>
 
@@ -283,7 +283,7 @@
 </div>
 
 <div class="footer-desc">
-<strong>How the rules read</strong> &middot; <strong>S (survive)</strong>: the number of neighbours a living cell needs in order to stay alive. <strong>B (born)</strong>: the number a dead cell needs in order to come to life.
+<strong>How the rules read</strong> &middot; <strong>S (survive)</strong>: the number of neighbors a living cell needs in order to stay alive. <strong>B (born)</strong>: the number a dead cell needs in order to come to life.
 </div>
 </div>
 
@@ -306,12 +306,12 @@
 <div class="preset-row">
 <div class="preset-col">
 <select id="presetSelect" aria-label="Rule preset">
-<option value="b3s23">Conway's Game of Life (B3/S23)</option>
-<option value="b2s3">B2/S3 &mdash; low threshold</option>
+<option value="b3s23">Conway&rsquo;s Game of Life (B3/S23)</option>
+<option value="b2s3">Low threshold (B2/S3)</option>
 <option value="b3s012345678">Life without Death (B3/S012345678)</option>
 <option value="b36s23">HighLife (B36/S23)</option>
-<option value="b35s23">B35/S23 &mdash; dense</option>
-<option value="b2s23">B2/S23 &mdash; fast spread</option>
+<option value="b35s23">Dense (B35/S23)</option>
+<option value="b2s23">Fast spread (B2/S23)</option>
 </select>
 <div class="btn-row">
 <button id="applyRuleBtn" class="small-btn" type="button">Apply</button>
@@ -357,12 +357,12 @@
 </div>
 </div>
 </div>
-<p class="game-caption">No score, no opponent, no ending &mdash; only rules and the local neighbourhood of each cell.</p>
+<p class="game-caption">No score, no opponent, no ending &mdash; only rules and the local neighborhood of each cell.</p>
 </div>
 
 <section class="wrap section">
 <h2>How to use this page</h2>
-<p>There is nothing to win here. The canvas is a grid of cells, some alive and some dead; each step recomputes every cell from the state of its eight neighbours, and nothing else. What you control is the rule that decides the outcome, and the starting pattern that the rule acts on.</p>
+<p>There is nothing to win here. The canvas is a grid of cells, some alive and some dead; each step recomputes every cell from the state of its eight neighbors, and nothing else. What you control is the rule that decides the outcome, and the starting pattern that the rule acts on.</p>
 
 <table class="gtable">
 <caption>Playback and the canvas</caption>
@@ -382,8 +382,8 @@
 <caption>Rules: the two checkboxes, the preset menu and Apply</caption>
 <thead><tr><th>Control</th><th>What it does</th></tr></thead>
 <tbody>
-<tr><td>Survive (S) checkboxes</td><td>Select the neighbour counts at which a <em>living</em> cell survives. With 2 and 3 ticked, a living cell with two or three neighbours stays alive and dies at any other count.</td></tr>
-<tr><td>Born (B) checkboxes</td><td>Select the neighbour counts at which a <em>dead</em> cell becomes alive. With only 3 ticked, a dead cell is born when exactly three of its neighbours are alive.</td></tr>
+<tr><td>Survive (S) checkboxes</td><td>Select the neighbor counts at which a <em>living</em> cell survives. With 2 and 3 ticked, a living cell with two or three neighbors stays alive and dies at any other count.</td></tr>
+<tr><td>Born (B) checkboxes</td><td>Select the neighbor counts at which a <em>dead</em> cell becomes alive. With only 3 ticked, a dead cell is born when exactly three of its neighbors are alive.</td></tr>
 <tr><td>Apply</td><td>Takes the current state of all eighteen checkboxes and writes it into the rule the simulation uses, then redraws. It does <strong>not</strong> clear the canvas, does <strong>not</strong> reset the generation counter and does <strong>not</strong> change the stored starting pattern &mdash; the picture looks identical until the next step, because rules decide the next generation, not the current one. <strong>Ticked boxes have no effect until you press Apply</strong>; if you tick a box and press Start, the simulation still uses the previous rule.</td></tr>
 <tr><td>Rule preset menu</td><td>Applies a named rule immediately on selection &mdash; no Apply needed. It rewrites the checkboxes to match, so you can see exactly which counts the preset uses, then adjust them from there.</td></tr>
 </tbody>
@@ -393,7 +393,7 @@
 <caption>Patterns, files and jumping</caption>
 <thead><tr><th>Control</th><th>What it does</th></tr></thead>
 <tbody>
-<tr><td>Place</td><td>Drops the selected pattern at the <strong>centre of the canvas</strong>; there is no drag-and-drop and no click-to-position in this build. It pauses the simulation first, clears the rectangular area the pattern will occupy (erasing any cells already there), writes the pattern, then treats the result as a new generation 0 and resets the counter. To place a pattern somewhere else, clear the canvas and draw it by hand, or edit the saved JSON file.</td></tr>
+<tr><td>Place</td><td>Drops the selected pattern at the <strong>center of the canvas</strong>; there is no drag-and-drop and no click-to-position in this build. It pauses the simulation first, clears the rectangular area the pattern will occupy (erasing any cells already there), writes the pattern, then treats the result as a new generation 0 and resets the counter. To place a pattern somewhere else, clear the canvas and draw it by hand, or edit the saved JSON file.</td></tr>
 <tr><td>Save settings</td><td>Downloads a JSON file containing the grid size, the speed, the full S and B rule sets and the entire cell grid, named with a timestamp. Nothing is stored on a server; the file is the only copy.</td></tr>
 <tr><td>Load settings</td><td>Reads such a file back, checking that the required fields exist and that the grid dimensions match the declared size, and rejects the file with a message if they do not. The loaded grid becomes generation 0, the counter resets and the speed slider follows the file.</td></tr>
 <tr><td>Jump</td><td>Recomputes the requested generation from the stored starting pattern, without animating the intermediate steps, and stops the simulation. The value must be a whole number of zero or greater. There is no upper limit, so a very large number will genuinely compute that many generations and the page will freeze for a moment.</td></tr>
@@ -403,17 +403,17 @@
 
 <section class="wrap section">
 <h2>Rules and presets</h2>
-<p>Six rules are provided. Each is written as <strong>B</strong><em>counts</em>/<strong>S</strong><em>counts</em>: the neighbour counts that create a cell, followed by the counts that keep one alive. Changing the rule is the whole experiment &mdash; the same starting pattern will thrive, freeze or vanish depending on which numbers appear here.</p>
+<p>Six rules are provided. Each is written as <strong>B</strong><em>counts</em>/<strong>S</strong><em>counts</em>: the neighbor counts that create a cell, followed by the counts that keep one alive. Changing the rule is the whole experiment &mdash; the same starting pattern will thrive, freeze or vanish depending on which numbers appear here.</p>
 
 <table class="gtable">
 <thead><tr><th>Preset</th><th>What happens</th><th>When to choose it</th></tr></thead>
 <tbody>
-<tr><td>Conway's Game of Life (B3/S23)</td><td>The original rule from 1970. A living cell survives with two or three neighbours and dies of isolation or crowding otherwise; a dead cell is born with exactly three. It is balanced enough to sustain motion: gliders travel, blinkers oscillate, guns emit.</td><td>Start here. Every pattern in the menu is meant to be seen under this rule first, and it is the only rule in which the classic figures behave as their names suggest.</td></tr>
-<tr><td>B2/S3 &mdash; low threshold</td><td>Birth needs only two neighbours instead of three, so growth starts far more easily. Populations expand quickly and then stall into large empty regions separated by thin walls.</td><td>When you want to see how a lower birth threshold changes the character of growth: faster ignition, earlier saturation.</td></tr>
-<tr><td>Life without Death (B3/S012345678)</td><td>Every living cell survives at any neighbour count from 0 to 8, so nothing ever dies; cells are only ever added, and only where exactly three neighbours meet. Patterns crystallise permanently and grow outward in a fixed texture.</td><td>To demonstrate growth without decay. It makes the point that &ldquo;survival&rdquo; is a rule, not a property of the cell.</td></tr>
-<tr><td>HighLife (B36/S23)</td><td>Conway's rule plus birth at six neighbours. The extra condition admits a replicator, a small figure that copies itself indefinitely.</td><td>To show that one extra number in the rule can create an entirely new class of behaviour.</td></tr>
-<tr><td>B35/S23 &mdash; dense</td><td>Birth at five neighbours as well as three. Patterns grow thicker and blockier, with compact masses replacing the delicate structures of B3/S23.</td><td>To compare a permissive but not explosive rule against the classic one.</td></tr>
-<tr><td>B2/S23 &mdash; fast spread</td><td>Birth at two neighbours while survival still requires two or three. Growth is faster than Conway's and tends to form bands and streaks rather than isolated figures.</td><td>To watch the effect of lowering the birth threshold alone, keeping survival unchanged. Compare it directly with B2/S3 above to see what the survival rule contributes.</td></tr>
+<tr><td>Conway&rsquo;s Game of Life (B3/S23)</td><td>The original rule from 1970. A living cell survives with two or three neighbors and dies of isolation or crowding otherwise; a dead cell is born with exactly three. It is balanced enough to sustain motion: gliders travel, blinkers oscillate, guns emit.</td><td>Start here. Every pattern in the menu is meant to be seen under this rule first, and it is the only rule in which the classic figures behave as their names suggest.</td></tr>
+<tr><td>Low threshold (B2/S3)</td><td>Birth needs only two neighbors instead of three, so growth starts far more easily. Populations expand quickly and then stall into large empty regions separated by thin walls.</td><td>When you want to see how a lower birth threshold changes the character of growth: faster ignition, earlier saturation.</td></tr>
+<tr><td>Life without Death (B3/S012345678)</td><td>Every living cell survives at any neighbor count from 0 to 8, so nothing ever dies; cells are only ever added, and only where exactly three neighbors meet. Patterns crystallize permanently and grow outward in a fixed texture.</td><td>To demonstrate growth without decay. It makes the point that &ldquo;survival&rdquo; is a rule, not a property of the cell.</td></tr>
+<tr><td>HighLife (B36/S23)</td><td>Conway&rsquo;s rule plus birth at six neighbors. The extra condition admits a replicator, a small figure that copies itself indefinitely.</td><td>To show that one extra number in the rule can create an entirely new class of behavior.</td></tr>
+<tr><td>Dense (B35/S23)</td><td>Birth at five neighbors as well as three. Patterns grow thicker and blockier, with compact masses replacing the delicate structures of B3/S23.</td><td>To compare a permissive but not explosive rule against the classic one.</td></tr>
+<tr><td>Fast spread (B2/S23)</td><td>Birth at two neighbors while survival still requires two or three. Growth is faster than Conway&rsquo;s and tends to form bands and streaks rather than isolated figures.</td><td>To watch the effect of lowering the birth threshold alone, keeping survival unchanged. Compare it directly with B2/S3 above to see what the survival rule contributes.</td></tr>
 </tbody>
 </table>
 </section>
@@ -473,7 +473,7 @@
     return cnt;
   }
 
-  /* Count the eight neighbours of a cell. Edges are not wrapped. */
+  /* Count the eight neighbors of a cell. Edges are not wrapped. */
   function countNeighbors(row, col, sourceGrid) {
     sourceGrid = sourceGrid || grid;
     var count = 0;
@@ -709,7 +709,7 @@
     ]
   };
 
-  /* Place a pattern at the centre of the canvas. */
+  /* Place a pattern at the center of the canvas. */
   function placeShape(shapeName) {
     var shapeCoords = shapes[shapeName];
     if (!shapeCoords) return;

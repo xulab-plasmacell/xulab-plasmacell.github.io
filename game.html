@@ -230,12 +230,39 @@
 }
 
 /* ---------- Page prose: guide tables, scoped to this page ---------- */
-.gtable { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 8px 0 20px; font-size: .93rem; }
-.gtable caption { text-align: left; font-family: var(--serif); font-size: 1rem; color: var(--ink); padding: 0 0 8px; }
-.gtable th, .gtable td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
-.gtable th { font-family: var(--serif); font-weight: 600; color: var(--ink); background: var(--paper); font-size: .9rem; letter-spacing: .01em; }
-.gtable td:first-child { width: 27%; font-weight: 600; color: var(--accent-deep); }
-.gtable tr:last-child td { border-bottom: none; }
+.howto-lede { font-size: .95rem; color: var(--muted); margin: 0 0 20px; max-width: 64ch; line-height: 1.6; }
+.howto-group + .howto-group { margin-top: 22px; }
+.howto-group h3 {
+  font-family: var(--serif); font-size: .82rem; font-weight: 600;
+  color: var(--accent); letter-spacing: .08em; text-transform: uppercase;
+  margin: 0 0 6px;
+}
+.howto-list { margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.howto-row {
+  display: grid; grid-template-columns: 124px 1fr; gap: 4px 18px;
+  padding: 8px 0; border-bottom: 1px solid var(--line);
+}
+.howto-row dt { font-size: .88rem; font-weight: 600; color: var(--accent-deep); line-height: 1.5; }
+.howto-row dd { margin: 0; font-size: .88rem; line-height: 1.55; color: var(--ink); }
+.howto-note {
+  margin: 20px 0 0; padding: 10px 14px; border-radius: 6px;
+  background: var(--accent-soft); color: var(--accent-deep);
+  font-size: .85rem; line-height: 1.55;
+}
+.howto-note strong { font-weight: 600; }
+@media (max-width: 560px) {
+  .howto-row { grid-template-columns: 1fr; gap: 1px; }
+  .howto-row dt { font-size: .85rem; }
+}
+.howto-rules .howto-row { grid-template-columns: 150px 1fr; }
+.rule-code {
+  font-family: ui-monospace, Consolas, monospace; font-size: .8rem; font-weight: 600;
+  color: var(--accent); letter-spacing: .02em;
+}
+.why { color: var(--muted); }
+@media (max-width: 560px) {
+  .howto-rules .howto-row { grid-template-columns: 1fr; }
+}
 .game-caption { font-size: .9rem; color: var(--warm-deep); border-left: 3px solid var(--accent-soft); padding-left: 14px; margin: 18px 0 0; }
 .game-plays { font-size: .85rem; color: var(--muted); margin: 10px 0 0 17px; letter-spacing: .005em; }
 .game-plays strong { color: var(--accent-deep); font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -404,60 +431,52 @@ gtag('config', 'G-FF5Z2KBLBT');
 
 <section class="wrap section">
 <h2>How to use this page</h2>
-<p>There is nothing to win here. The canvas is a grid of cells, some alive and some dead; each step recomputes every cell from the state of its eight neighbors, and nothing else. What you control is the rule that decides the outcome, and the starting pattern that the rule acts on.</p>
+<p class="howto-lede">Nothing to win here: the canvas is a grid of cells, and every step recomputes each cell from its eight neighbours and nothing else. What you control is the rule that decides the outcome, and the starting pattern the rule acts on.</p>
+<div class="howto-group">
+<h3>Playback and the canvas</h3>
+<dl class="howto-list">
+<div class="howto-row"><dt>Start / Pause</dt><dd>Runs the simulation, one generation every <em>Speed</em> milliseconds. The label flips to <em>Pause</em> while it runs.</dd></div>
+<div class="howto-row"><dt>Step</dt><dd>Pauses, then advances exactly one generation &mdash; the way to watch a pattern move frame by frame.</dd></div>
+<div class="howto-row"><dt>Canvas click</dt><dd>Toggles a single cell. The generation counter keeps going, but a later <em>Jump</em> rebuilds the pattern and discards the edit.</dd></div>
+<div class="howto-row"><dt>Random</dt><dd>Fills the grid at 5%, 15% or 30%. Whatever it produces becomes generation 0.</dd></div>
+<div class="howto-row"><dt>Clear</dt><dd>Empties the grid and zeroes the generation and cell count &mdash; the cleanest way to draw by hand.</dd></div>
+<div class="howto-row"><dt>Speed</dt><dd>Delay between generations, 5&ndash;500 ms. Lower is faster; dragging it mid-run restarts the loop but not the counter.</dd></div>
+<div class="howto-row"><dt>Cell size</dt><dd>The canvas is fixed at 800 &times; 600 px, so 10 px cells give 80 &times; 60 and 20 px cells give 40 &times; 30. Resizing keeps the top-left content and resets to generation 0.</dd></div>
+</dl>
+</div>
+<div class="howto-group">
+<h3>Rules</h3>
+<dl class="howto-list">
+<div class="howto-row"><dt>Survive (S)</dt><dd>Neighbour counts at which a <em>living</em> cell stays alive; tick 2 and 3 for the classic rule.</dd></div>
+<div class="howto-row"><dt>Born (B)</dt><dd>Neighbour counts at which a <em>dead</em> cell comes to life; tick only 3 for the classic rule.</dd></div>
+<div class="howto-row"><dt>Apply</dt><dd>Writes all eighteen checkboxes into the rule actually in force. <strong>Ticked boxes do nothing until you press it</strong> &mdash; press Start without Apply and the previous rule still runs.</dd></div>
+<div class="howto-row"><dt>Presets</dt><dd>Applies a named rule the moment you select it, no Apply needed, and moves the checkboxes to match so you can see what it uses.</dd></div>
+</dl>
+</div>
+<div class="howto-group">
+<h3>Patterns, files and jumping</h3>
+<dl class="howto-list">
+<div class="howto-row"><dt>Place</dt><dd>Drops the selected pattern at the canvas centre, erasing whatever it covers &mdash; no drag and drop in this build. The result is generation 0.</dd></div>
+<div class="howto-row"><dt>Save settings</dt><dd>Downloads a JSON file holding the grid size, speed, rule and every cell. Nothing is stored on a server; the file is the only copy.</dd></div>
+<div class="howto-row"><dt>Load settings</dt><dd>Reads such a file back and rejects it with a message if a required field is missing or the grid size does not match.</dd></div>
+<div class="howto-row"><dt>Jump</dt><dd>Recomputes generation N from the stored starting pattern without animating the steps. There is no upper limit, so a very large N will freeze the page for a moment.</dd></div>
+</dl>
+</div>
+<p class="howto-note"><strong>Nothing you change redraws the canvas on its own</strong> &mdash; a new rule only shows up in the next generation. The order that works: tick &rarr; Apply &rarr; Step.</p>
 
-<table class="gtable">
-<caption>Playback and the canvas</caption>
-<thead><tr><th>Control</th><th>What it does</th></tr></thead>
-<tbody>
-<tr><td>Start / Pause</td><td>Runs the simulation, advancing one generation every <em>Speed</em> milliseconds. The button label switches to <em>Pause</em> while it runs. Changing a rule does not affect a running simulation until you apply it &mdash; see <em>Apply</em> below.</td></tr>
-<tr><td>Step</td><td>Pauses the simulation, then advances exactly one generation. Use it to watch a single pattern move or oscillate frame by frame.</td></tr>
-<tr><td>Clicking the canvas</td><td>Switches one cell between alive and dead. Manual edits do not reset the generation counter and do not change the stored starting pattern, so an edited cell will be overwritten if you later use <em>Jump</em>.</td></tr>
-<tr><td>Random</td><td>Fills the whole grid at the density chosen in the menu to its left (5%, 15% or 30%). The new grid becomes generation 0, and the starting cell count is reset to whatever it now holds.</td></tr>
-<tr><td>Clear</td><td>Empties the grid, resets the generation to 0 and sets the starting cell count to 0. This is the cleanest way to start drawing a pattern by hand.</td></tr>
-<tr><td>Speed</td><td>Delay between generations, from 5 ms to 500 ms. Lower is faster. Dragging it while the simulation runs restarts the loop but does not reset the generation counter.</td></tr>
-<tr><td>Cell size</td><td>Changes the size of a cell, which in practice changes the grid resolution: the canvas is fixed at 800 &times; 600 pixels, so a cell size of 10 gives 80 &times; 60 cells and a size of 20 gives 40 &times; 30. Existing content is kept in the top-left corner, new area is left empty, and the generation resets to 0 with the resized grid taken as the new starting point.</td></tr>
-</tbody>
-</table>
-
-<table class="gtable">
-<caption>Rules: the two checkboxes, the preset menu and Apply</caption>
-<thead><tr><th>Control</th><th>What it does</th></tr></thead>
-<tbody>
-<tr><td>Survive (S) checkboxes</td><td>Select the neighbor counts at which a <em>living</em> cell survives. With 2 and 3 ticked, a living cell with two or three neighbors stays alive and dies at any other count.</td></tr>
-<tr><td>Born (B) checkboxes</td><td>Select the neighbor counts at which a <em>dead</em> cell becomes alive. With only 3 ticked, a dead cell is born when exactly three of its neighbors are alive.</td></tr>
-<tr><td>Apply</td><td>Takes the current state of all eighteen checkboxes and writes it into the rule the simulation uses, then redraws. It does <strong>not</strong> clear the canvas, does <strong>not</strong> reset the generation counter and does <strong>not</strong> change the stored starting pattern &mdash; the picture looks identical until the next step, because rules decide the next generation, not the current one. <strong>Ticked boxes have no effect until you press Apply</strong>; if you tick a box and press Start, the simulation still uses the previous rule.</td></tr>
-<tr><td>Rule preset menu</td><td>Applies a named rule immediately on selection &mdash; no Apply needed. It rewrites the checkboxes to match, so you can see exactly which counts the preset uses, then adjust them from there.</td></tr>
-</tbody>
-</table>
-
-<table class="gtable">
-<caption>Patterns, files and jumping</caption>
-<thead><tr><th>Control</th><th>What it does</th></tr></thead>
-<tbody>
-<tr><td>Place</td><td>Drops the selected pattern at the <strong>center of the canvas</strong>; there is no drag-and-drop and no click-to-position in this build. It pauses the simulation first, clears the rectangular area the pattern will occupy (erasing any cells already there), writes the pattern, then treats the result as a new generation 0 and resets the counter. To place a pattern somewhere else, clear the canvas and draw it by hand, or edit the saved JSON file.</td></tr>
-<tr><td>Save settings</td><td>Downloads a JSON file containing the grid size, the speed, the full S and B rule sets and the entire cell grid, named with a timestamp. Nothing is stored on a server; the file is the only copy.</td></tr>
-<tr><td>Load settings</td><td>Reads such a file back, checking that the required fields exist and that the grid dimensions match the declared size, and rejects the file with a message if they do not. The loaded grid becomes generation 0, the counter resets and the speed slider follows the file.</td></tr>
-<tr><td>Jump</td><td>Recomputes the requested generation from the stored starting pattern, without animating the intermediate steps, and stops the simulation. The value must be a whole number of zero or greater. There is no upper limit, so a very large number will genuinely compute that many generations and the page will freeze for a moment.</td></tr>
-</tbody>
-</table>
 </section>
 
 <section class="wrap section">
 <h2>Rules and presets</h2>
-<p>Six rules are provided. Each is written as <strong>B</strong><em>counts</em>/<strong>S</strong><em>counts</em>: the neighbor counts that create a cell, followed by the counts that keep one alive. Changing the rule is the whole experiment &mdash; the same starting pattern will thrive, freeze or vanish depending on which numbers appear here.</p>
-
-<table class="gtable">
-<thead><tr><th>Preset</th><th>What happens</th><th>When to choose it</th></tr></thead>
-<tbody>
-<tr><td>Conway&rsquo;s Game of Life (B3/S23)</td><td>The original rule from 1970. A living cell survives with two or three neighbors and dies of isolation or crowding otherwise; a dead cell is born with exactly three. It is balanced enough to sustain motion: gliders travel, blinkers oscillate, guns emit.</td><td>Start here. Every pattern in the menu is meant to be seen under this rule first, and it is the only rule in which the classic figures behave as their names suggest.</td></tr>
-<tr><td>Low threshold (B2/S3)</td><td>Birth needs only two neighbors instead of three, so growth starts far more easily. Populations expand quickly and then stall into large empty regions separated by thin walls.</td><td>When you want to see how a lower birth threshold changes the character of growth: faster ignition, earlier saturation.</td></tr>
-<tr><td>Life without Death (B3/S012345678)</td><td>Every living cell survives at any neighbor count from 0 to 8, so nothing ever dies; cells are only ever added, and only where exactly three neighbors meet. Patterns crystallize permanently and grow outward in a fixed texture.</td><td>To demonstrate growth without decay. It makes the point that &ldquo;survival&rdquo; is a rule, not a property of the cell.</td></tr>
-<tr><td>HighLife (B36/S23)</td><td>Conway&rsquo;s rule plus birth at six neighbors. The extra condition admits a replicator, a small figure that copies itself indefinitely.</td><td>To show that one extra number in the rule can create an entirely new class of behavior.</td></tr>
-<tr><td>Dense (B35/S23)</td><td>Birth at five neighbors as well as three. Patterns grow thicker and blockier, with compact masses replacing the delicate structures of B3/S23.</td><td>To compare a permissive but not explosive rule against the classic one.</td></tr>
-<tr><td>Fast spread (B2/S23)</td><td>Birth at two neighbors while survival still requires two or three. Growth is faster than Conway&rsquo;s and tends to form bands and streaks rather than isolated figures.</td><td>To watch the effect of lowering the birth threshold alone, keeping survival unchanged. Compare it directly with B2/S3 above to see what the survival rule contributes.</td></tr>
-</tbody>
-</table>
+<p class="howto-lede">Six rules are provided, each written as <strong>B</strong><em>counts</em>/<strong>S</strong><em>counts</em> &mdash; the neighbor counts that create a cell, followed by the counts that keep one alive. Changing the rule is the whole experiment: the same starting pattern will thrive, freeze or vanish depending on which numbers appear here.</p>
+<dl class="howto-list howto-rules">
+<div class="howto-row howto-rule"><dt>Conway&rsquo;s Game of Life<br><span class="rule-code">B3/S23</span></dt><dd>The original rule from 1970. A living cell survives with two or three neighbors and dies of isolation or crowding otherwise; a dead cell is born with exactly three. Balanced enough to sustain motion: gliders travel, blinkers oscillate, guns emit. <span class="why">Start here &mdash; every pattern in the menu is meant to be seen under this rule first..</span></dd></div>
+<div class="howto-row howto-rule"><dt>Low threshold<br><span class="rule-code">B2/S3</span></dt><dd>Birth needs only two neighbors instead of three, so growth starts far more easily: quick expansion, then a stall into large empty regions separated by thin walls. <span class="why">To see how a lower birth threshold changes the character of growth..</span></dd></div>
+<div class="howto-row howto-rule"><dt>Life without Death<br><span class="rule-code">B3/S012345678</span></dt><dd>Every living cell survives at any neighbor count from 0 to 8, so nothing ever dies. Patterns crystallize permanently and grow outward in a fixed texture. <span class="why">To demonstrate growth without decay &mdash; &ldquo;survival&rdquo; is a rule, not a property of the cell..</span></dd></div>
+<div class="howto-row howto-rule"><dt>HighLife<br><span class="rule-code">B36/S23</span></dt><dd>Conway&rsquo;s rule plus birth at six neighbors. The extra condition admits a replicator, a small figure that copies itself indefinitely. <span class="why">To show that one extra number in the rule can create an entirely new class of behavior..</span></dd></div>
+<div class="howto-row howto-rule"><dt>Dense<br><span class="rule-code">B35/S23</span></dt><dd>Birth at five neighbors as well as three. Patterns grow thicker and blockier, with compact masses replacing the delicate structures of B3/S23. <span class="why">To compare a permissive but not explosive rule against the classic one..</span></dd></div>
+<div class="howto-row howto-rule"><dt>Fast spread<br><span class="rule-code">B2/S23</span></dt><dd>Birth at two neighbors while survival still requires two or three. Growth is faster than Conway&rsquo;s and tends to form bands and streaks rather than isolated figures. <span class="why">Compare it directly with B2/S3 above to see what the survival rule contributes..</span></dd></div>
+</dl>
 </section>
 </main>
 <footer class="site-footer"><div class="wrap">

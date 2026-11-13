@@ -232,6 +232,21 @@
 /* ---------- Page prose: guide tables, scoped to this page ---------- */
 .howto-lede { font-size: .95rem; color: var(--muted); margin: 0 0 20px; max-width: 64ch; line-height: 1.6; }
 .howto-group + .howto-group { margin-top: 22px; }
+.howto-cols {
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: 44px;
+  align-items: start;
+}
+.howto-cols .howto-row { grid-template-columns: 104px 1fr; gap: 4px 14px; }
+.howto-cols .howto-row dt { font-size: .86rem; }
+.howto-cols .howto-row dd { font-size: .86rem; }
+.howto-cols > .howto-group { margin-top: 0; }
+.howto-col { display: block; }
+.howto-col > .howto-group:first-child { margin-top: 0; }
+@media (max-width: 900px) {
+  .howto-cols { grid-template-columns: 1fr; column-gap: 0; }
+  .howto-col > .howto-group:first-child { margin-top: 22px; }
+  .howto-cols .howto-row { grid-template-columns: 124px 1fr; gap: 4px 18px; }
+}
 .howto-group h3 {
   font-family: var(--serif); font-size: .82rem; font-weight: 600;
   color: var(--accent); letter-spacing: .08em; text-transform: uppercase;
@@ -432,6 +447,7 @@ gtag('config', 'G-FF5Z2KBLBT');
 <section class="wrap section">
 <h2>How to use this page</h2>
 <p class="howto-lede">Nothing to win here: the canvas is a grid of cells, and every step recomputes each cell from its eight neighbours and nothing else. What you control is the rule that decides the outcome, and the starting pattern the rule acts on.</p>
+<div class="howto-cols">
 <div class="howto-group">
 <h3>Playback and the canvas</h3>
 <dl class="howto-list">
@@ -444,6 +460,7 @@ gtag('config', 'G-FF5Z2KBLBT');
 <div class="howto-row"><dt>Cell size</dt><dd>The canvas is fixed at 800 &times; 600 px, so 10 px cells give 80 &times; 60 and 20 px cells give 40 &times; 30. Resizing keeps the top-left content and resets to generation 0.</dd></div>
 </dl>
 </div>
+<div class="howto-col">
 <div class="howto-group">
 <h3>Rules</h3>
 <dl class="howto-list">
@@ -462,6 +479,9 @@ gtag('config', 'G-FF5Z2KBLBT');
 <div class="howto-row"><dt>Jump</dt><dd>Recomputes generation N from the stored starting pattern without animating the steps. There is no upper limit, so a very large N will freeze the page for a moment.</dd></div>
 </dl>
 </div>
+</div>
+</div>
+
 <p class="howto-note"><strong>Nothing you change redraws the canvas on its own</strong> &mdash; a new rule only shows up in the next generation. The order that works: tick &rarr; Apply &rarr; Step.</p>
 
 </section>
@@ -470,12 +490,12 @@ gtag('config', 'G-FF5Z2KBLBT');
 <h2>Rules and presets</h2>
 <p class="howto-lede">Six rules are provided, each written as <strong>B</strong><em>counts</em>/<strong>S</strong><em>counts</em> &mdash; the neighbor counts that create a cell, followed by the counts that keep one alive. Changing the rule is the whole experiment: the same starting pattern will thrive, freeze or vanish depending on which numbers appear here.</p>
 <dl class="howto-list howto-rules">
-<div class="howto-row howto-rule"><dt>Conway&rsquo;s Game of Life<br><span class="rule-code">B3/S23</span></dt><dd>The original rule from 1970. A living cell survives with two or three neighbors and dies of isolation or crowding otherwise; a dead cell is born with exactly three. Balanced enough to sustain motion: gliders travel, blinkers oscillate, guns emit. <span class="why">Start here &mdash; every pattern in the menu is meant to be seen under this rule first..</span></dd></div>
-<div class="howto-row howto-rule"><dt>Low threshold<br><span class="rule-code">B2/S3</span></dt><dd>Birth needs only two neighbors instead of three, so growth starts far more easily: quick expansion, then a stall into large empty regions separated by thin walls. <span class="why">To see how a lower birth threshold changes the character of growth..</span></dd></div>
-<div class="howto-row howto-rule"><dt>Life without Death<br><span class="rule-code">B3/S012345678</span></dt><dd>Every living cell survives at any neighbor count from 0 to 8, so nothing ever dies. Patterns crystallize permanently and grow outward in a fixed texture. <span class="why">To demonstrate growth without decay &mdash; &ldquo;survival&rdquo; is a rule, not a property of the cell..</span></dd></div>
-<div class="howto-row howto-rule"><dt>HighLife<br><span class="rule-code">B36/S23</span></dt><dd>Conway&rsquo;s rule plus birth at six neighbors. The extra condition admits a replicator, a small figure that copies itself indefinitely. <span class="why">To show that one extra number in the rule can create an entirely new class of behavior..</span></dd></div>
-<div class="howto-row howto-rule"><dt>Dense<br><span class="rule-code">B35/S23</span></dt><dd>Birth at five neighbors as well as three. Patterns grow thicker and blockier, with compact masses replacing the delicate structures of B3/S23. <span class="why">To compare a permissive but not explosive rule against the classic one..</span></dd></div>
-<div class="howto-row howto-rule"><dt>Fast spread<br><span class="rule-code">B2/S23</span></dt><dd>Birth at two neighbors while survival still requires two or three. Growth is faster than Conway&rsquo;s and tends to form bands and streaks rather than isolated figures. <span class="why">Compare it directly with B2/S3 above to see what the survival rule contributes..</span></dd></div>
+<div class="howto-row howto-rule"><dt>Conway&rsquo;s Game of Life<br><span class="rule-code">B3/S23</span></dt><dd>The original rule from 1970. A living cell survives with two or three neighbors and dies of isolation or crowding otherwise; a dead cell is born with exactly three. Balanced enough to sustain motion: gliders travel, blinkers oscillate, guns emit. <span class="why">Start here &mdash; every pattern in the menu is meant to be seen under this rule first.</span></dd></div>
+<div class="howto-row howto-rule"><dt>Low threshold<br><span class="rule-code">B2/S3</span></dt><dd>Birth needs only two neighbors instead of three, so growth starts far more easily: quick expansion, then a stall into large empty regions separated by thin walls. <span class="why">To see how a lower birth threshold changes the character of growth.</span></dd></div>
+<div class="howto-row howto-rule"><dt>Life without Death<br><span class="rule-code">B3/S012345678</span></dt><dd>Every living cell survives at any neighbor count from 0 to 8, so nothing ever dies. Patterns crystallize permanently and grow outward in a fixed texture. <span class="why">To demonstrate growth without decay &mdash; &ldquo;survival&rdquo; is a rule, not a property of the cell.</span></dd></div>
+<div class="howto-row howto-rule"><dt>HighLife<br><span class="rule-code">B36/S23</span></dt><dd>Conway&rsquo;s rule plus birth at six neighbors. The extra condition admits a replicator, a small figure that copies itself indefinitely. <span class="why">To show that one extra number in the rule can create an entirely new class of behavior.</span></dd></div>
+<div class="howto-row howto-rule"><dt>Dense<br><span class="rule-code">B35/S23</span></dt><dd>Birth at five neighbors as well as three. Patterns grow thicker and blockier, with compact masses replacing the delicate structures of B3/S23. <span class="why">To compare a permissive but not explosive rule against the classic one.</span></dd></div>
+<div class="howto-row howto-rule"><dt>Fast spread<br><span class="rule-code">B2/S23</span></dt><dd>Birth at two neighbors while survival still requires two or three. Growth is faster than Conway&rsquo;s and tends to form bands and streaks rather than isolated figures. <span class="why">Compare it directly with B2/S3 above to see what the survival rule contributes.</span></dd></div>
 </dl>
 </section>
 </main>

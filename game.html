@@ -261,6 +261,15 @@
   .head-card .lede { font-size: 1rem; }
 }
 </style>
+<!-- Google Analytics 4 -->
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FF5Z2KBLBT"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-FF5Z2KBLBT');
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -1017,6 +1026,7 @@
 
   function record() {
     if (countedThisVisit) { return; }
+    if (window.gtag) { gtag('event', 'game_start'); }
     countedThisVisit = true;
     pending = known;
     show(known + 1);                 // 点击后立刻 +1（仅是显示，未确认的不写入）

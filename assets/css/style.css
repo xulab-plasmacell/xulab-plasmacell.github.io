@@ -323,3 +323,15 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
 @media (prefers-reduced-motion: reduce) {
   .gallery-grid figure, .gallery-grid figure:hover { transition: none; transform: none; }
 }
+.lede-note { margin: -4px 0 0; font-size: .9rem; color: var(--muted); }
+/* --- Game of Life callout: single-accent emphasis --- */
+.overview-highlight {
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  color: var(--accent-deep);
+  font-weight: 500;
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+}
+.overview-highlight a { color: var(--accent-deep); font-weight: 600; }

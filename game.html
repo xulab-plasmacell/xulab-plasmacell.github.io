@@ -17,6 +17,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://plasmacells.org/images/og-image.jpg?v=20261113b">
 <title>Game | Xu Lab | Plasma Cell Biology, Sun Yat-sen University</title>
+<link rel="preconnect" href="https://abacus.jasoncameron.dev" crossorigin>
+<link rel="dns-prefetch" href="https://abacus.jasoncameron.dev">
 <link rel="stylesheet" href="assets/css/style.css?v=20261113d">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage","name":"Game | Xu Lab","url":"https://plasmacells.org/game.html","about":{"@type":"Organization","name":"Xu Lab","url":"https://plasmacells.org/"}}
@@ -388,7 +390,7 @@
 </div>
 </div>
 <p class="game-caption">No score, no opponent, no ending &mdash; only rules and the local neighborhood of each cell.</p>
-<p class="game-plays" id="gamePlays" hidden>Played <strong id="gamePlayCount">0</strong> times so far.</p>
+<p class="game-plays" id="gamePlays" data-count="5">Played <strong id="gamePlayCount">5</strong> times so far.</p>
 </div>
 
 <section class="wrap section">
@@ -973,39 +975,61 @@
 (function () {
   var NS = 'xulab-plasmacells', KEY = 'game-plays';
   var API = 'https://abacus.jasoncameron.dev';
+  var TIMEOUT = 6000;
   var box = document.getElementById('gamePlays');
   var num = document.getElementById('gamePlayCount');
   if (!box || !num || !window.fetch) { return; }
 
-  function render(n) {
+  // 数字已写死在 HTML（data-count），首屏立即显示，不必等任何请求。
+  var known = parseInt(box.getAttribute('data-count'), 10);
+  if (!isFinite(known) || known < 0) { known = 0; }
+
+  function show(n) {
     if (typeof n !== 'number' || !isFinite(n) || n < 0) { return; }
+    known = n;
     num.textContent = n.toLocaleString('en-US');
-    box.hidden = false;
   }
 
-  function read() {
-    fetch(API + '/get/' + NS + '/' + KEY, { cache: 'no-store' })
+  // 带超时、失败重试一次的请求
+  function req(path, attempt) {
+    attempt = attempt || 0;
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, TIMEOUT) : null;
+    return fetch(API + path, { cache: 'no-store', signal: ctrl ? ctrl.signal : undefined })
       .then(function (r) { return r.json(); })
-      .then(function (d) { render(d && d.value); })
-      .catch(function () {});
+      .then(function (d) { if (timer) { clearTimeout(timer); } return d; })
+      .catch(function (err) {
+        if (timer) { clearTimeout(timer); }
+        if (attempt < 1) {
+          return new Promise(function (res) { setTimeout(res, 1200); })
+            .then(function () { return req(path, attempt + 1); });
+        }
+        throw err;
+      });
   }
 
-  // 每次打开页面都重新计数：同一访客刷新或重进页面后再按 Start，会再次累加。
-  var countedThisVisit = false;
+  // 页面加载：只做一次静默刷新，取到就用服务端的实时值
+  req('/get/' + NS + '/' + KEY).then(function (d) {
+    if (d && typeof d.value === 'number') { show(d.value); }
+  }).catch(function () { /* 取不到就保留 HTML 里的数字，不显示加载态 */ });
+
+  var countedThisVisit = false, pending = known;
 
   function record() {
     if (countedThisVisit) { return; }
     countedThisVisit = true;
-    fetch(API + '/hit/' + NS + '/' + KEY, { cache: 'no-store' })
-      .then(function (r) { return r.json(); })
-      .then(function (d) { render(d && d.value); })
-      .catch(function () { countedThisVisit = false; });
+    pending = known;
+    show(known + 1);                 // 点击后立刻 +1（仅是显示，未确认的不写入）
+    req('/hit/' + NS + '/' + KEY).then(function (d) {
+      if (d && typeof d.value === 'number') { show(d.value); }   // 以服务端为准
+    }).catch(function () {
+      show(pending);                 // 没记上就退回点击前的数字
+      countedThisVisit = false;
+    });
   }
 
   var startBtn = document.getElementById('playPauseBtn');
   if (startBtn) { startBtn.addEventListener('click', record); }
-
-  read();
 })();
 </script>
 </body>

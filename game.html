@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://plasmacells.org/images/og-image.jpg?v=20261113b">
 <title>Game | Xu Lab | Plasma Cell Biology, Sun Yat-sen University</title>
-<link rel="stylesheet" href="assets/css/style.css?v=20261113b">
+<link rel="stylesheet" href="assets/css/style.css?v=20261113c">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage","name":"Game | Xu Lab","url":"https://plasmacells.org/game.html","about":{"@type":"Organization","name":"Xu Lab","url":"https://plasmacells.org/"}}
 </script>
@@ -236,6 +236,25 @@
 .gtable tr:last-child td { border-bottom: none; }
 .game-caption { font-size: .9rem; color: var(--warm-deep); border-left: 3px solid var(--accent-soft); padding-left: 14px; margin: 18px 0 0; }
 .h1-alias { font-size: .55em; font-weight: 400; color: var(--muted); letter-spacing: 0; }
+/* 头部淡蓝卡片（V10）：标题深蓝、导语墨色加重、维护者注在细线之下 */
+.head-card {
+  background: var(--accent-soft);
+  border-radius: 8px;
+  padding: 24px 26px 22px;
+}
+.head-card h1 { color: var(--accent-deep); font-size: 2rem; margin: 0 0 6px; }
+.head-card .h1-alias { font-size: .55em; font-weight: 400; color: var(--accent); letter-spacing: 0; }
+.head-card .lede { margin-top: 6px; font-size: 1.12rem; color: var(--ink); line-height: 1.55; }
+.head-card .lede-note {
+  margin: 16px 0 0; padding-top: 12px;
+  border-top: 1px solid rgba(11,90,143,.22);
+  font-size: .8rem; color: var(--accent-deep);
+}
+@media (max-width: 520px) {
+  .head-card { padding: 18px 18px 16px; }
+  .head-card h1 { font-size: 1.65rem; }
+  .head-card .lede { font-size: 1rem; }
+}
 </style>
 </head>
 <body>
@@ -246,9 +265,11 @@
 </div></header>
 <main id="main">
 <section class="wrap page-head">
+<div class="head-card">
 <h1>Game <span class="h1-alias">(Conway&rsquo;s Game of Life)</span></h1>
 <p class="lede">A niche game about the conditions that keep a cell alive.</p>
 <p class="lede-note">Maintained by the Xu Lab &mdash; Prof. Chunliang Xu, Sun Yat-sen University.</p>
+</div>
 </section>
 
 <section class="wrap section">
@@ -425,7 +446,8 @@
 </section>
 </main>
 <footer class="site-footer"><div class="wrap">
-<p class="footer-name">Xu Lab &middot; Prof. Chunliang Xu &middot; Zhongshan School of Medicine, Sun Yat-sen University <span class="footer-tagline">&middot; Humoral immune memory, long-lived plasma cells and durable vaccine protection</span></p>
+<p class="footer-name">Xu Lab &middot; Prof. Chunliang Xu &middot; Zhongshan School of Medicine, Sun Yat-sen University</p>
+<p class="footer-tagline">Humoral immune memory, long-lived plasma cells and durable vaccine protection</p>
 <p class="footer-meta">&copy; 2026 Xu Lab. All rights reserved. &middot; Email: contact (at) plasmacells.org</p>
 </div></footer>
 <script>

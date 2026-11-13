@@ -223,8 +223,9 @@ address { font-style: normal; line-height: 1.8; }
 .site-footer p { margin: 4px 0; }
 .footer-name { color: var(--ink); font-weight: 600; }
 .footer-tagline {
-  font-family: var(--serif); font-style: italic;
-  color: var(--warm-deep); font-weight: 400; font-size: .95em;
+  margin: 6px 0 4px;
+  color: var(--accent-deep); font-weight: 500;
+  font-size: .84rem; letter-spacing: .012em;
 }
 
 @media (max-width: 640px) {

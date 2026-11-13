@@ -219,6 +219,7 @@ address { font-style: normal; line-height: 1.8; }
 .site-footer {
   background: var(--paper); border-top: 3px solid var(--ink);
   padding: var(--space-3) 0; font-size: .84rem; color: var(--muted);
+  text-align: center;
 }
 .site-footer p { margin: 4px 0; }
 .footer-name { color: var(--ink); font-weight: 600; }

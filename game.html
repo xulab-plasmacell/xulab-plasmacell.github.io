@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://plasmacells.org/images/og-image.jpg?v=20261113b">
 <title>Game | Xu Lab | Plasma Cell Biology, Sun Yat-sen University</title>
-<link rel="stylesheet" href="assets/css/style.css?v=20261113c">
+<link rel="stylesheet" href="assets/css/style.css?v=20261113d">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage","name":"Game | Xu Lab","url":"https://plasmacells.org/game.html","about":{"@type":"Organization","name":"Xu Lab","url":"https://plasmacells.org/"}}
 </script>
@@ -388,7 +388,7 @@
 </div>
 </div>
 <p class="game-caption">No score, no opponent, no ending &mdash; only rules and the local neighborhood of each cell.</p>
-<p class="game-plays" id="gamePlays" hidden>Played by <strong id="gamePlayCount">0</strong> <span id="gamePlayUnit">visitors</span> so far.</p>
+<p class="game-plays" id="gamePlays" hidden>Played <strong id="gamePlayCount">0</strong> times so far.</p>
 </div>
 
 <section class="wrap section">
@@ -968,21 +968,18 @@
   });
 })();
 </script>
-<!-- Play counter: increments once per browser on the first real interaction -->
+<!-- Play counter: one count per page visit, recorded when Start is pressed -->
 <script>
 (function () {
   var NS = 'xulab-plasmacells', KEY = 'game-plays';
   var API = 'https://abacus.jasoncameron.dev';
   var box = document.getElementById('gamePlays');
   var num = document.getElementById('gamePlayCount');
-  var unit = document.getElementById('gamePlayUnit');
-  var FLAG = 'xulab-game-counted';
   if (!box || !num || !window.fetch) { return; }
 
   function render(n) {
     if (typeof n !== 'number' || !isFinite(n) || n < 0) { return; }
     num.textContent = n.toLocaleString('en-US');
-    if (unit) { unit.textContent = n === 1 ? 'visitor' : 'visitors'; }
     box.hidden = false;
   }
 
@@ -993,33 +990,20 @@
       .catch(function () {});
   }
 
-  var counted = false;
-  try { counted = window.localStorage.getItem(FLAG) === '1'; } catch (e) {}
+  // 每次打开页面都重新计数：同一访客刷新或重进页面后再按 Start，会再次累加。
+  var countedThisVisit = false;
 
   function record() {
-    if (counted) { return; }
-    counted = true;
-    try { window.localStorage.setItem(FLAG, '1'); } catch (e) {}
+    if (countedThisVisit) { return; }
+    countedThisVisit = true;
     fetch(API + '/hit/' + NS + '/' + KEY, { cache: 'no-store' })
       .then(function (r) { return r.json(); })
       .then(function (d) { render(d && d.value); })
-      .catch(function () {
-        counted = false;
-        try { window.localStorage.removeItem(FLAG); } catch (e) {}
-      });
+      .catch(function () { countedThisVisit = false; });
   }
 
-  ['playPauseBtn', 'stepBtn', 'randomBtn', 'applyRuleBtn'].forEach(function (id) {
-    var el = document.getElementById(id);
-    if (el) { el.addEventListener('click', record); }
-  });
-  var preset = document.getElementById('presetSelect');
-  if (preset) { preset.addEventListener('change', record); }
-  var canvas = document.getElementById('canvas') || document.querySelector('canvas');
-  if (canvas) {
-    canvas.addEventListener('mousedown', record);
-    canvas.addEventListener('touchstart', record, { passive: true });
-  }
+  var startBtn = document.getElementById('playPauseBtn');
+  if (startBtn) { startBtn.addEventListener('click', record); }
 
   read();
 })();

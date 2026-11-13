@@ -235,6 +235,9 @@
 .gtable td:first-child { width: 27%; font-weight: 600; color: var(--accent-deep); }
 .gtable tr:last-child td { border-bottom: none; }
 .game-caption { font-size: .9rem; color: var(--warm-deep); border-left: 3px solid var(--accent-soft); padding-left: 14px; margin: 18px 0 0; }
+.game-plays { font-size: .85rem; color: var(--muted); margin: 10px 0 0 17px; letter-spacing: .005em; }
+.game-plays strong { color: var(--accent-deep); font-weight: 600; font-variant-numeric: tabular-nums; }
+.game-plays[hidden] { display: none; }
 .h1-alias { font-size: .55em; font-weight: 400; color: var(--muted); letter-spacing: 0; }
 /* 头部淡蓝卡片（V10）：标题深蓝、导语墨色加重、维护者注在细线之下 */
 .head-card {
@@ -385,6 +388,7 @@
 </div>
 </div>
 <p class="game-caption">No score, no opponent, no ending &mdash; only rules and the local neighborhood of each cell.</p>
+<p class="game-plays" id="gamePlays" hidden>Played by <strong id="gamePlayCount">0</strong> <span id="gamePlayUnit">visitors</span> so far.</p>
 </div>
 
 <section class="wrap section">
@@ -962,6 +966,62 @@
       }
     }, { passive: false });
   });
+})();
+</script>
+<!-- Play counter: increments once per browser on the first real interaction -->
+<script>
+(function () {
+  var NS = 'xulab-plasmacells', KEY = 'game-plays';
+  var API = 'https://abacus.jasoncameron.dev';
+  var box = document.getElementById('gamePlays');
+  var num = document.getElementById('gamePlayCount');
+  var unit = document.getElementById('gamePlayUnit');
+  var FLAG = 'xulab-game-counted';
+  if (!box || !num || !window.fetch) { return; }
+
+  function render(n) {
+    if (typeof n !== 'number' || !isFinite(n) || n < 0) { return; }
+    num.textContent = n.toLocaleString('en-US');
+    if (unit) { unit.textContent = n === 1 ? 'visitor' : 'visitors'; }
+    box.hidden = false;
+  }
+
+  function read() {
+    fetch(API + '/get/' + NS + '/' + KEY, { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { render(d && d.value); })
+      .catch(function () {});
+  }
+
+  var counted = false;
+  try { counted = window.localStorage.getItem(FLAG) === '1'; } catch (e) {}
+
+  function record() {
+    if (counted) { return; }
+    counted = true;
+    try { window.localStorage.setItem(FLAG, '1'); } catch (e) {}
+    fetch(API + '/hit/' + NS + '/' + KEY, { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { render(d && d.value); })
+      .catch(function () {
+        counted = false;
+        try { window.localStorage.removeItem(FLAG); } catch (e) {}
+      });
+  }
+
+  ['playPauseBtn', 'stepBtn', 'randomBtn', 'applyRuleBtn'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) { el.addEventListener('click', record); }
+  });
+  var preset = document.getElementById('presetSelect');
+  if (preset) { preset.addEventListener('change', record); }
+  var canvas = document.getElementById('canvas') || document.querySelector('canvas');
+  if (canvas) {
+    canvas.addEventListener('mousedown', record);
+    canvas.addEventListener('touchstart', record, { passive: true });
+  }
+
+  read();
 })();
 </script>
 </body>
